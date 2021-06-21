@@ -8,7 +8,6 @@ module.exports = {
 		'airbnb',
 		'plugin:@typescript-eslint/recommended',
 		'prettier',
-		'plugin:prettier/recommended',
 	],
 	parser: '@typescript-eslint/parser',
 	parserOptions: {
@@ -36,6 +35,7 @@ module.exports = {
 				jsx: 'never',
 			},
 		],
+		semi: ['error', 'always'],
 	},
 	settings: {
 		'import/resolver': {
@@ -46,4 +46,4 @@ module.exports = {
 			},
 		},
 	},
-}
+};
