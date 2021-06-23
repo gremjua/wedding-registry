@@ -17,7 +17,7 @@ module.exports = {
 		ecmaVersion: 12,
 		sourceType: 'module',
 	},
-	plugins: ['react', '@typescript-eslint'],
+	plugins: ['react', '@typescript-eslint', 'prettier'],
 	rules: {
 		'no-use-before-define': 'off',
 		'@typescript-eslint/no-use-before-define': ['error'],
@@ -36,6 +36,19 @@ module.exports = {
 			},
 		],
 		semi: ['error', 'always'],
+		'react/jsx-props-no-spreading': 'off',
+		'react/require-default-props': 'off',
+		'prettier/prettier': [
+			'warn',
+			{
+				singleQuote: true,
+				semi: true,
+				useTabs: true,
+				tabWidth: 1,
+				jsxSingleQuote: true,
+				arrowParens: 'avoid',
+			},
+		],
 	},
 	settings: {
 		'import/resolver': {
