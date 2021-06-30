@@ -12,6 +12,7 @@ import ScrollTop from 'components/navBar/ScrollTop';
 import headerImage from 'images/juanYSol.jpg';
 import pretzel from 'images/pretzel3.svg';
 import './index.css';
+import GiftCartWidget from './GiftCartWidget';
 
 type NavBarProps = {
 	/**
@@ -28,12 +29,15 @@ const NavBar = (props: NavBarProps): JSX.Element => {
 		<>
 			<div id='back-to-top-anchor' />
 			<ElevationScroll {...props}>
-				<AppBar position={collapse ? 'relative' : 'fixed'}>
-					{/* here we should remove position and see how material ui does with padding etc */}
+				<AppBar position={collapse ? 'relative' : 'sticky'}>
 					<Box className='headerContainer'>
-						<Toolbar>
-							<Typography variant='h6'>Juan & Sol</Typography>
+						<Toolbar style={{ width: '100%' }}>
+							<Typography variant='h6' align='center' style={{ width: '100%' }}>
+								Juan & Sol
+							</Typography>
+							<GiftCartWidget />
 						</Toolbar>
+
 						<Collapse in={collapse}>
 							<Box className='headerImageContainer'>
 								<img src={headerImage} alt='Juan and Sol' className='headerImage' />
