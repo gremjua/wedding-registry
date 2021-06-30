@@ -6,7 +6,8 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import ElevationScroll from 'components/navBar/ElevationScroll';
 import Fab from '@material-ui/core/Fab';
-import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronUp } from '@fortawesome/free-solid-svg-icons';
 import ScrollTop from 'components/navBar/ScrollTop';
 import headerImage from 'images/juanYSol.jpg';
 import pretzel from 'images/pretzel3.svg';
@@ -46,7 +47,7 @@ const NavBar = (props: NavBarProps): JSX.Element => {
 			</ElevationScroll>
 			<ScrollTop {...props}>
 				<Fab color='primary' size='small' aria-label='scroll back to top'>
-					<KeyboardArrowUpIcon />
+					<FontAwesomeIcon icon={faChevronUp} size='lg' />
 				</Fab>
 			</ScrollTop>
 		</>
