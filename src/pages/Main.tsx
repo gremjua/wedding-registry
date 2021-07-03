@@ -8,23 +8,24 @@ const Main = (): JSX.Element => (
 			<Box my='10px'>
 				<Button
 					component={RouterLink}
-					to='/payment'
-					variant='contained'
-					size='large'
-					color='primary'
-				>
-					Enviales dinero
-				</Button>
-			</Box>
-			<Box my='10px'>
-				<Button
-					component={RouterLink}
 					to='/gifts'
 					variant='contained'
 					size='large'
 					color='primary'
 				>
 					Elegí un regalo
+				</Button>
+			</Box>
+			<Box my='10px'>
+				<Button
+					// /* ON CLICK: clear CART and clear AMOUNT from context */
+					component={RouterLink}
+					to='/payment'
+					variant='contained'
+					size='large'
+					color='primary'
+				>
+					Enviales dinero
 				</Button>
 			</Box>
 		</Box>

@@ -29,6 +29,7 @@ function App(): JSX.Element {
 						render={() => {
 							setHeaderCollapsed(true);
 							return <Payment />;
+							/* USE AMOUNT FROM CART CONTEXT */
 						}}
 					/>
 					{/* <Route path='/category/:categoryId' component={ItemListContainer} />
