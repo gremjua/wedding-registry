@@ -29,7 +29,7 @@ const NavBar = (props: NavBarProps): JSX.Element => {
 		<>
 			<div id='back-to-top-anchor' />
 			<ElevationScroll {...props}>
-				<AppBar position={collapse ? 'relative' : 'sticky'}>
+				<AppBar position={!collapse ? 'relative' : 'sticky'}>
 					<Box className='headerContainer'>
 						<Toolbar style={{ width: '100%' }}>
 							<Typography variant='h6' align='center' style={{ width: '100%' }}>
@@ -38,7 +38,7 @@ const NavBar = (props: NavBarProps): JSX.Element => {
 							<GiftCartWidget />
 						</Toolbar>
 
-						<Collapse in={collapse}>
+						<Collapse in={!collapse}>
 							<Box className='headerImageContainer'>
 								<img src={headerImage} alt='Juan and Sol' className='headerImage' />
 							</Box>

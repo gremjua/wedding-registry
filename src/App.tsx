@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import NavBar from 'components/navBar';
 import Button from '@material-ui/core/Button';
 import Main from 'pages/Main';
+import Payment from 'pages/Payment';
 
 function App(): JSX.Element {
 	const [headerCollapsed, setHeaderCollapsed] = useState(true);
@@ -14,7 +15,22 @@ function App(): JSX.Element {
 			<BrowserRouter>
 				<NavBar collapse={headerCollapsed} />
 				<Switch>
-					<Route exact path='/' component={Main} />
+					<Route
+						exact
+						path='/'
+						render={() => {
+							setHeaderCollapsed(false);
+							return <Main />;
+						}}
+					/>
+					<Route
+						exact
+						path='/payment'
+						render={() => {
+							setHeaderCollapsed(true);
+							return <Payment />;
+						}}
+					/>
 					{/* <Route path='/category/:categoryId' component={ItemListContainer} />
 					<Route path='/item/:itemId' component={ItemDetailContainer} />
 					<Route exact path='/cart' component={Cart} />
