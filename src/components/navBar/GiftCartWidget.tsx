@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { Badge, IconButton } from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGifts } from '@fortawesome/free-solid-svg-icons';
+import { Link as RouterLink } from 'react-router-dom';
 
 const GiftCartWidget = (): JSX.Element | null => {
 	// const { giftCart, getTotals } = useContext(GiftCartContext);
@@ -10,8 +11,8 @@ const GiftCartWidget = (): JSX.Element | null => {
 	return giftCart.length ? (
 		<IconButton
 			style={{ position: 'absolute', right: '0px' }}
-			// component={RouterLink}
-			// to='/giftCart'
+			component={RouterLink}
+			to='/giftCart'
 			color='inherit'
 			aria-label='view gift cart'
 		>
