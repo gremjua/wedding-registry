@@ -20,7 +20,7 @@ const Main = (): JSX.Element => (
 				<Button
 					// /* ON CLICK: clear CART and clear AMOUNT from context */
 					component={RouterLink}
-					to='/payment'
+					to='/giftTagging'
 					variant='contained'
 					size='large'
 					color='primary'

@@ -5,7 +5,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import NavBar from 'components/navBar';
 import Button from '@material-ui/core/Button';
 import Main from 'pages/Main';
-import Payment from 'pages/Payment';
+import GiftTagging from 'pages/GiftTagging';
 
 function App(): JSX.Element {
 	const [headerCollapsed, setHeaderCollapsed] = useState(true);
@@ -25,10 +25,10 @@ function App(): JSX.Element {
 					/>
 					<Route
 						exact
-						path='/payment'
+						path='/giftTagging'
 						render={() => {
 							setHeaderCollapsed(true);
-							return <Payment />;
+							return <GiftTagging />;
 							/* USE AMOUNT FROM CART CONTEXT */
 						}}
 					/>

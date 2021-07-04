@@ -1,12 +1,12 @@
 import React from 'react';
 import { Box, Container } from '@material-ui/core';
-import GiftTagForm from 'components/payment/GiftTagForm';
+import GiftTagForm from 'components/giftTagging/GiftTagForm';
 
 type Props = {
 	amount?: number;
 };
 
-const Payment = ({
+const GiftTagging = ({
 	amount,
 }: Props): JSX.Element => ( // Take out amount, use from CART CONTEXT
 	<Container>
@@ -16,4 +16,4 @@ const Payment = ({
 	</Container>
 );
 
-export default Payment;
+export default GiftTagging;
