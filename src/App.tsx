@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import NavBar from 'components/navBar';
 import Button from '@material-ui/core/Button';
 import Main from 'pages/Main';
+import Gifts from 'pages/Gifts';
 import GiftTagging from 'pages/GiftTagging';
 
 function App(): JSX.Element {
@@ -21,6 +22,14 @@ function App(): JSX.Element {
 						render={() => {
 							setHeaderCollapsed(false);
 							return <Main />;
+						}}
+					/>
+					<Route
+						exact
+						path='/gifts'
+						render={() => {
+							setHeaderCollapsed(true);
+							return <Gifts />;
 						}}
 					/>
 					<Route

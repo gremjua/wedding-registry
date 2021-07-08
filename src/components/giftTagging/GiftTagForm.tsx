@@ -88,7 +88,7 @@ const GiftTagForm = (props: Props): JSX.Element => {
 			initialValues={{ ...initialValues, ...(amount && { amount }) }}
 			validate={validateForm}
 			onSubmit={(values, { setSubmitting }) => {
-				// handlePurchase(values);
+				// TODO: handlePurchase(values);
 				console.log(values);
 				setSubmitting(false);
 			}}
