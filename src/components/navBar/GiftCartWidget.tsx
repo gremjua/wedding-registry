@@ -3,11 +3,11 @@ import { Badge, IconButton } from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGifts } from '@fortawesome/free-solid-svg-icons';
 import { Link as RouterLink } from 'react-router-dom';
+import { GiftCartContext } from 'context/GiftCartContext';
 
 const GiftCartWidget = (): JSX.Element | null => {
-	// const { giftCart, getTotals } = useContext(GiftCartContext);
-	const giftCart = [1, 2];
-	// const { totalQuantity } = getTotals();
+	const { getGiftCart } = useContext(GiftCartContext);
+	const giftCart = getGiftCart();
 	return giftCart.length ? (
 		<IconButton
 			style={{ position: 'absolute', right: '0px' }}

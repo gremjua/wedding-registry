@@ -7,7 +7,8 @@ import {
 	Typography,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import React from 'react';
+import { GiftCartContext } from 'context/GiftCartContext';
+import React, { useContext } from 'react';
 import { Gift } from './types';
 
 const useStyles = makeStyles({
@@ -30,8 +31,9 @@ type Props = {
 const GiftItem = (props: Props): JSX.Element => {
 	const { item } = props;
 	const classes = useStyles();
+	const { addGiftToCart } = useContext(GiftCartContext);
 	return (
-		<Card>
+		<Card onClick={() => addGiftToCart(item)}>
 			{/* If isInCart => mark as in cart */}
 			<CardActionArea className={classes.action}>
 				<CardMedia
