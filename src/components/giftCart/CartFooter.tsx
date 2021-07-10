@@ -1,10 +1,10 @@
-import { Box, Button, Divider, Grid, Typography } from '@material-ui/core';
+import { Button, Divider, Grid, Typography } from '@material-ui/core';
 import ChooseGiftButton from 'components/common/ChooseGiftButton';
 import { GiftCartContext } from 'context/GiftCartContext';
 import { Link as RouterLink } from 'react-router-dom';
 import React, { useContext } from 'react';
 
-const CartFooter = () => {
+const CartFooter = (): JSX.Element => {
 	const { getTotals } = useContext(GiftCartContext);
 	const { totalPrice } = getTotals();
 	return (

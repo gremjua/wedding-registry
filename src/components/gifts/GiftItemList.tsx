@@ -7,7 +7,7 @@ type Props = {
 	gifts: Gift[];
 };
 
-const GiftItemList = (props: Props) => {
+const GiftItemList = (props: Props): JSX.Element => {
 	const { gifts } = props;
 	return (
 		<Grid

@@ -1,7 +1,7 @@
 import { Divider, Grid, Typography } from '@material-ui/core';
 import React from 'react';
 
-const CartHeader = () => (
+const CartHeader = (): JSX.Element => (
 	<Grid
 		container
 		direction='row'
