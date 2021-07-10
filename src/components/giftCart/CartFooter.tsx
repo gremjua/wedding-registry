@@ -40,9 +40,8 @@ const CartFooter = (): JSX.Element => {
 				>
 					<Grid item xs={12}>
 						<Button
-							// /* ON CLICK: clear CART and clear AMOUNT from context */
 							component={RouterLink}
-							to='/giftTagging'
+							to='/giftTagging/cart'
 							variant='contained'
 							size='large'
 							color='secondary'

@@ -9,3 +9,5 @@ export type Filter = {
 	min: number;
 	max: number;
 };
+
+export type GiftKind = 'money' | 'cart';

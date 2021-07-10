@@ -37,10 +37,9 @@ function App(): JSX.Element {
 								/>
 								<Route
 									exact
-									path='/giftTagging'
+									path='/giftTagging/:giftKind'
 									render={() => {
 										setHeaderCollapsed(true);
-										/* No amount set because it will be set in the page */
 										return <GiftTagging />;
 									}}
 								/>
