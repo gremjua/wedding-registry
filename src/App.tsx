@@ -8,6 +8,7 @@ import { GiftCartProvider } from 'context/GiftCartContext';
 import { GiftItemsProvider } from 'context/GiftItemsContext';
 import PageContainer from 'pages/PageContainer';
 import GiftCart from 'pages/GiftCart';
+import ScrollTop from 'components/router/ScrollTop';
 
 function App(): JSX.Element {
 	const [headerCollapsed, setHeaderCollapsed] = useState(true);
@@ -15,6 +16,7 @@ function App(): JSX.Element {
 		<div className='App'>
 			<GiftCartProvider>
 				<BrowserRouter>
+					<ScrollTop />
 					<NavBar collapse={headerCollapsed} />
 					<GiftItemsProvider>
 						<PageContainer>
