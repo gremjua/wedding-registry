@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import logo from 'logo.svg';
-import 'App.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import NavBar from 'components/navBar';
 import Main from 'pages/Main';
@@ -9,6 +7,7 @@ import GiftTagging from 'pages/GiftTagging';
 import { GiftCartProvider } from 'context/GiftCartContext';
 import { GiftItemsProvider } from 'context/GiftItemsContext';
 import PageContainer from 'pages/PageContainer';
+import GiftCart from 'pages/GiftCart';
 
 function App(): JSX.Element {
 	const [headerCollapsed, setHeaderCollapsed] = useState(true);
@@ -43,6 +42,14 @@ function App(): JSX.Element {
 										setHeaderCollapsed(true);
 										/* No amount set because it will be set in the page */
 										return <GiftTagging />;
+									}}
+								/>
+								<Route
+									exact
+									path='/giftCart'
+									render={() => {
+										setHeaderCollapsed(true);
+										return <GiftCart />;
 									}}
 								/>
 								{/* <Route path='/category/:categoryId' component={ItemListContainer} />

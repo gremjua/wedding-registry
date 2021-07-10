@@ -1,20 +1,13 @@
 import React from 'react';
 import { Box, Button, Container } from '@material-ui/core';
 import { Link as RouterLink } from 'react-router-dom';
+import ChooseGiftButton from 'components/common/ChooseGiftButton';
 
 const Main = (): JSX.Element => (
 	<Container>
 		<Box my='20px' display='flex' flexDirection='column' alignItems='center'>
 			<Box my='10px'>
-				<Button
-					component={RouterLink}
-					to='/gifts'
-					variant='contained'
-					size='large'
-					color='primary'
-				>
-					Elegí un regalo
-				</Button>
+				<ChooseGiftButton />
 			</Box>
 			<Box my='10px'>
 				<Button
