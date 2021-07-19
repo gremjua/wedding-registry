@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {
 	Box,
 	Button,
@@ -8,6 +8,8 @@ import {
 } from '@material-ui/core';
 import { Formik, Form, Field } from 'formik';
 import { TextField } from 'formik-material-ui';
+import { useHistory } from 'react-router-dom';
+import { Transaction, TransactionContext } from 'context/TransactionContext';
 
 const initialValues = {
 	tag: '',
@@ -66,9 +68,10 @@ type Props = {
 	amount?: number;
 };
 
-// const GiftTagForm = ({ handlePurchase }) => {
 const GiftTagForm = (props: Props): JSX.Element => {
 	const { amount } = props;
+	const history = useHistory();
+	const { setTransaction } = useContext(TransactionContext);
 	const validateForm = (values: any) => {
 		const errors: { [index: string]: string } = Object.keys(values).reduce(
 			(accErrors, field) => {
@@ -88,9 +91,10 @@ const GiftTagForm = (props: Props): JSX.Element => {
 			initialValues={{ ...initialValues, ...(amount && { amount }) }}
 			validate={validateForm}
 			onSubmit={(values, { setSubmitting }) => {
-				// TODO: handlePurchase(values);
 				console.log(values);
+				setTransaction(values as Transaction);
 				setSubmitting(false);
+				history.push('/transfer');
 			}}
 		>
 			{({ submitForm, isSubmitting }) => (

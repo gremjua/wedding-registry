@@ -16,7 +16,7 @@ const GiftTagging = (): JSX.Element => {
 	return (
 		<Container>
 			<Box my='20px'>
-				<GiftTagForm amount={amount} /> {/* USE AMOUNT FROM CART CONTEXT */}
+				<GiftTagForm amount={amount} />
 			</Box>
 		</Container>
 	);

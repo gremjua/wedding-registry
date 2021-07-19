@@ -1,7 +1,7 @@
 import { Gift } from 'components/gifts/types';
 import React, { createContext, useState } from 'react';
 // import { fetchItems as getDbItems } from '../firebase/getItems';
-import fetchMockItems from './mocks';
+import { fetchMockItems } from './mocks';
 
 type GiftItemsContextProps = {
 	getItems: () => Gift[];
