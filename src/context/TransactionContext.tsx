@@ -1,3 +1,8 @@
+import {
+	fetchTransactionDB,
+	storeTransactionDB,
+	updateTransactionDB,
+} from 'db/transactions';
 import React, { createContext, useState } from 'react';
 import {
 	fetchMockTransaction,
@@ -17,6 +22,7 @@ export type Transaction = {
 export type DBTransaction = Transaction & {
 	id: string;
 	status: TransactionStatus;
+	timestamp?: Date;
 };
 
 type TransactionContextProps = {
@@ -41,18 +47,20 @@ export const TransactionProvider = ({
 
 	const clearTransaction = () => setTransaction(undefined);
 
-	const storeTransaction = (t: Transaction): Promise<string> => {
-		// TODO: fix return type according to firebase doc ID
-		console.log(transaction); // TODO: store in DB with status
-		return storeMockTransaction(t);
-		// MAYBE: store with 'status' = 'pending' ?
-	};
+	const storeTransaction = (t: Transaction): Promise<string> =>
+		process.env.REACT_APP_USE_MOCKS
+			? storeMockTransaction(t)
+			: storeTransactionDB(t);
 
 	const fetchTransaction = (id: string): Promise<DBTransaction> =>
-		fetchMockTransaction(id);
+		process.env.REACT_APP_USE_MOCKS
+			? fetchMockTransaction(id)
+			: fetchTransactionDB(id);
 
 	const updateTransaction = (t: DBTransaction): Promise<boolean> =>
-		updateMockTransaction(t);
+		process.env.REACT_APP_USE_MOCKS
+			? updateMockTransaction(t)
+			: updateTransactionDB(t);
 
 	const approveTransaction = (transactionId: string): Promise<boolean> =>
 		fetchTransaction(transactionId)
