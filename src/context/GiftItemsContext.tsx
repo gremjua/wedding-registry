@@ -1,4 +1,5 @@
 import { Gift } from 'components/gifts/types';
+import fetchItemsDB from 'db/items';
 import React, { createContext, useState } from 'react';
 // import { fetchItems as getDbItems } from '../firebase/getItems';
 import { fetchMockItems } from './mocks';
@@ -22,7 +23,9 @@ export const GiftItemsProvider = ({
 
 	const getItems = () => items;
 	// fetch items from DB or mock items
-	const doFetchItems: () => Promise<Gift[]> = fetchMockItems;
+	const doFetchItems: () => Promise<Gift[]> = process.env.REACT_APP_USE_MOCKS
+		? fetchMockItems
+		: fetchItemsDB;
 	// process.env.USE_MOCKS ? getMockItems : getDbItems;
 	const fetchItems = () => doFetchItems().then(gifts => setItems(gifts));
 

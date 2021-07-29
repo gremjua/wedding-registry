@@ -4,31 +4,31 @@ import { DBTransaction, Transaction } from './TransactionContext';
 
 const gifts: Gift[] = [
 	{
-		id: 1,
+		id: '1',
 		name: 'Perchero nórdico',
 		price: 1000,
 		imageUrl: percheroNordico,
 	},
 	{
-		id: 2,
+		id: '2',
 		name: 'Perchero nórdico',
 		price: 5000,
 		imageUrl: percheroNordico,
 	},
 	{
-		id: 3,
+		id: '3',
 		name: 'Perchero nórdico',
 		price: 11000,
 		imageUrl: percheroNordico,
 	},
 	{
-		id: 4,
+		id: '4',
 		name: 'Perchero nórdico',
 		price: 20000,
 		imageUrl: percheroNordico,
 	},
 	{
-		id: 5,
+		id: '5',
 		name: 'Perchero nórdico',
 		price: 500000,
 		imageUrl: percheroNordico,
