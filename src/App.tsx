@@ -13,6 +13,7 @@ import { TransactionProvider } from 'context/TransactionContext';
 import Transfer from 'pages/Transfer';
 import Upload from 'pages/Upload';
 import TransferConfirm from 'pages/TransferConfirm';
+import Thanks from 'pages/Thanks';
 
 function App(): JSX.Element {
 	const [headerCollapsed, setHeaderCollapsed] = useState(true);
@@ -80,6 +81,14 @@ function App(): JSX.Element {
 										render={() => {
 											setHeaderCollapsed(true);
 											return <Upload />;
+										}}
+									/>
+									<Route
+										exact
+										path='/thanks'
+										render={() => {
+											setHeaderCollapsed(true);
+											return <Thanks />;
 										}}
 									/>
 								</Switch>
