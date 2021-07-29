@@ -11,6 +11,8 @@ import GiftCart from 'pages/GiftCart';
 import ScrollTop from 'components/router/ScrollTop';
 import { TransactionProvider } from 'context/TransactionContext';
 import Transfer from 'pages/Transfer';
+import Upload from 'pages/Upload';
+import TransferConfirm from 'pages/TransferConfirm';
 
 function App(): JSX.Element {
 	const [headerCollapsed, setHeaderCollapsed] = useState(true);
@@ -62,6 +64,22 @@ function App(): JSX.Element {
 										render={() => {
 											setHeaderCollapsed(true);
 											return <Transfer />;
+										}}
+									/>
+									<Route
+										exact
+										path='/transfer/confirm'
+										render={() => {
+											setHeaderCollapsed(true);
+											return <TransferConfirm />;
+										}}
+									/>
+									<Route
+										exact
+										path='/upload/:transactionId'
+										render={() => {
+											setHeaderCollapsed(true);
+											return <Upload />;
 										}}
 									/>
 								</Switch>

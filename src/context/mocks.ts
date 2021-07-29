@@ -67,3 +67,10 @@ export const fetchMockTransaction = (id: string): Promise<DBTransaction> =>
 			resolve(testDBTransaction);
 		}, 2000);
 	});
+
+export const updateMockTransaction = (t: DBTransaction): Promise<boolean> =>
+	new Promise(resolve => {
+		setTimeout(() => {
+			resolve(true);
+		}, 2000);
+	});

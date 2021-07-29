@@ -1,5 +1,9 @@
 import React, { createContext, useState } from 'react';
-import { fetchMockTransaction, storeMockTransaction } from './mocks';
+import {
+	fetchMockTransaction,
+	storeMockTransaction,
+	updateMockTransaction,
+} from './mocks';
 
 export type TransactionStatus = 'pending' | 'success' | 'failure';
 
@@ -17,9 +21,11 @@ export type DBTransaction = Transaction & {
 
 type TransactionContextProps = {
 	getTransaction: () => Transaction | undefined;
+	clearTransaction: () => void;
 	setTransaction: (transaction: Transaction) => void;
 	storeTransaction: (transaction: Transaction) => Promise<string>;
 	fetchTransaction: (id: string) => Promise<DBTransaction>;
+	approveTransaction: (transactionId: string) => Promise<boolean>;
 };
 
 export const TransactionContext = createContext({} as TransactionContextProps);
@@ -33,6 +39,8 @@ export const TransactionProvider = ({
 
 	const getTransaction = () => transaction;
 
+	const clearTransaction = () => setTransaction(undefined);
+
 	const storeTransaction = (t: Transaction): Promise<string> => {
 		// TODO: fix return type according to firebase doc ID
 		console.log(transaction); // TODO: store in DB with status
@@ -43,13 +51,26 @@ export const TransactionProvider = ({
 	const fetchTransaction = (id: string): Promise<DBTransaction> =>
 		fetchMockTransaction(id);
 
+	const updateTransaction = (t: DBTransaction): Promise<boolean> =>
+		updateMockTransaction(t);
+
+	const approveTransaction = (transactionId: string): Promise<boolean> =>
+		fetchTransaction(transactionId)
+			.then(t => {
+				const approvedTransaction: DBTransaction = { ...t, status: 'success' };
+				return updateTransaction(approvedTransaction);
+			})
+			.catch(error => false);
+
 	return (
 		<TransactionContext.Provider
 			value={{
 				getTransaction,
+				clearTransaction,
 				setTransaction,
 				storeTransaction,
 				fetchTransaction,
+				approveTransaction,
 			}}
 		>
 			{children}

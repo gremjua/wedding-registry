@@ -1,9 +1,12 @@
 import { Box, Button, Typography } from '@material-ui/core';
 import React, { useEffect, useRef, useState } from 'react';
 
-const TransferInfo = (): JSX.Element => {
+const TransferInfo = ({
+	voucherRef,
+}: {
+	voucherRef: React.RefObject<HTMLButtonElement>;
+}): JSX.Element => {
 	const cbuRef = useRef<HTMLInputElement>(null);
-	const voucherRef = useRef<HTMLButtonElement>(null);
 	const [copySuccess, setCopySuccess] = useState('');
 	useEffect(() => {
 		voucherRef.current?.focus();
@@ -45,11 +48,6 @@ const TransferInfo = (): JSX.Element => {
 					Copiá el CBU
 				</Button>
 				<span> {copySuccess}</span>
-			</Box>
-			<Box my='10px'>
-				<Button ref={voucherRef} variant='contained' color='primary'>
-					Subí el comprobante
-				</Button>
 			</Box>
 		</>
 	);
