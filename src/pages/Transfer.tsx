@@ -14,7 +14,9 @@ const Transfer = (): JSX.Element => {
 				{transaction ? (
 					<>
 						<Box my='10px'>
-							<Typography variant='h5'>{`Monto: $ ${transaction?.amount}`}</Typography>
+							<Typography variant='h5'>{`Monto: $ ${transaction?.amount.toLocaleString(
+								'es-ar'
+							)}`}</Typography>
 						</Box>
 						<Box my='10px'>
 							<Typography variant='body1' gutterBottom>

@@ -45,7 +45,7 @@ const GiftItem = (props: Props): JSX.Element => {
 						{item.name}
 					</Typography>
 					<Typography variant='subtitle1' color='textSecondary' align='center'>
-						{`AR$ ${item.price}`}
+						{`AR$ ${item.price.toLocaleString('es-ar')}`}
 					</Typography>
 				</CardContent>
 			</CardActionArea>

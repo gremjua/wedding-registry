@@ -40,7 +40,7 @@ const CartItem = ({ item: gift }: Props): JSX.Element => {
 				<Typography
 					variant='subtitle2'
 					align='center'
-				>{`AR$ ${gift.price}`}</Typography>
+				>{`AR$ ${gift.price.toLocaleString('es-ar')}`}</Typography>
 			</Grid>
 			<Grid item xs={2}>
 				<IconButton onClick={() => removeGiftFromCart(gift)}>

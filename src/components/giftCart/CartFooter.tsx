@@ -25,7 +25,7 @@ const CartFooter = (): JSX.Element => {
 			</Grid>
 			<Grid item xs={5}>
 				<Typography variant='h6' align='center'>
-					{`AR$ ${totalPrice}`}
+					{`AR$ ${totalPrice.toLocaleString('es-ar')}`}
 				</Typography>
 			</Grid>
 			<Grid item xs={2} />

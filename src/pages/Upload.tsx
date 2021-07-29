@@ -27,7 +27,9 @@ const Upload = (): JSX.Element | null => {
 					<>
 						<Box my='10px'>
 							<Typography> ID de transacción: {transactionId}</Typography>
-							<Typography> Monto: {`$${transactionDetails?.amount}`}</Typography>
+							<Typography>
+								Monto: {`$${transactionDetails?.amount.toLocaleString('es-ar')}`}
+							</Typography>
 						</Box>
 						<Box my='10px'>
 							<UploadButton transactionId={transactionId} />
