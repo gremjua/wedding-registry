@@ -10,7 +10,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronUp } from '@fortawesome/free-solid-svg-icons';
 import ScrollTop from 'components/navBar/ScrollTop';
 import headerImage from 'images/juanYSol.jpg';
-import pretzel from 'images/pretzel3.svg';
+import pretzel from 'images/pretzel2.svg';
 import './index.css';
 import GiftCartWidget from './GiftCartWidget';
 
