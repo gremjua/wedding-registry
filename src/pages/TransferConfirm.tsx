@@ -1,5 +1,6 @@
 import { Box, Container, Typography } from '@material-ui/core';
 import ChooseGiftButton from 'components/common/ChooseGiftButton';
+import Loading from 'components/common/Loading';
 import UploadButton from 'components/upload/UploadButton';
 import { GiftCartContext } from 'context/GiftCartContext';
 import { TransactionContext } from 'context/TransactionContext';
@@ -12,27 +13,27 @@ const TransferConfirm = (): JSX.Element => {
 	const { clearCart } = useContext(GiftCartContext);
 	const [transactionId, setTransactionId] = useState<string>();
 	const [amount, setAmount] = useState<number>();
+	const [isLoading, setIsLoading] = useState(false);
 	const voucherRef = useRef<HTMLButtonElement>(null);
 	const currentTransaction = getTransaction();
 
 	useEffect(() => {
 		if (currentTransaction) {
+			setIsLoading(true);
 			storeTransaction(currentTransaction)
 				.then(id => {
-					console.log('transaction ID', id);
 					setTransactionId(id);
 					setAmount(currentTransaction.amount);
 					clearTransaction();
 					clearCart(); // TODO: snackbar, "confirmaste tu regalo :tada: Solo falta que transfieras el dinero y subas el comprobante"
 				}) // TODO: send email in background, maybe vercel function
-				.catch(e => console.error(e)); // TODO: render error
+				.catch(e => console.error(e)) // TODO: render error
+				.finally(() => setIsLoading(false));
 		}
-		return () => {
-			setTransactionId(undefined);
-			setAmount(undefined);
-		};
 	}, []);
-	return (
+	return isLoading ? (
+		<Loading />
+	) : (
 		<Container>
 			<Box my='20px' display='flex' flexDirection='column' alignItems='center'>
 				{transactionId ? (
