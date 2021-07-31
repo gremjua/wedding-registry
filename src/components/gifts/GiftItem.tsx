@@ -1,4 +1,5 @@
 import {
+	Box,
 	Card,
 	CardActionArea,
 	CardContent,
@@ -8,14 +9,21 @@ import {
 import { makeStyles } from '@material-ui/core/styles';
 import { GiftCartContext } from 'context/GiftCartContext';
 import React, { useContext } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faGift } from '@fortawesome/free-solid-svg-icons';
+import GoToCartButton from 'components/common/GoToCartButton';
 import { Gift } from './types';
 
 const useStyles = makeStyles({
-	root: {},
+	root: {
+		position: 'relative',
+	},
 	action: {
 		display: 'flex',
+		justifyContent: 'flex-start',
 		alignContent: 'center',
 		flexDirection: 'column',
+		height: '280px',
 	},
 	media: {
 		height: '140px',
@@ -30,26 +38,46 @@ type Props = {
 const GiftItem = (props: Props): JSX.Element => {
 	const { item } = props;
 	const classes = useStyles();
-	const { addGiftToCart } = useContext(GiftCartContext);
+	const { addGiftToCart, isInCart } = useContext(GiftCartContext);
+
 	return (
-		<Card onClick={() => addGiftToCart(item)}>
-			{/* If isInCart => mark as in cart */}
-			<CardActionArea className={classes.action}>
-				<CardMedia
-					className={classes.media}
-					image={item.imageUrl}
-					title={item.name}
-				/>
-				<CardContent>
-					<Typography gutterBottom variant='body1' component='h2' align='center'>
-						{item.name}
-					</Typography>
-					<Typography variant='subtitle1' color='textSecondary' align='center'>
-						{`AR$ ${item.price.toLocaleString('es-ar')}`}
-					</Typography>
-				</CardContent>
-			</CardActionArea>
-		</Card>
+		<>
+			<Card className={classes.root} onClick={() => addGiftToCart(item)}>
+				{/* If isInCart => mark as in cart */}
+				<CardActionArea className={classes.action}>
+					<CardMedia
+						className={classes.media}
+						image={item.imageUrl}
+						title={item.name}
+					/>
+					<CardContent>
+						<Typography gutterBottom variant='body1' component='h2' align='center'>
+							{item.name}
+						</Typography>
+						<Typography variant='subtitle1' color='textSecondary' align='center'>
+							{`AR$ ${item.price.toLocaleString('es-ar')}`}
+						</Typography>
+					</CardContent>
+				</CardActionArea>
+				{isInCart(item) ? (
+					<Box
+						position='absolute'
+						width='100%'
+						height='100%'
+						top={0}
+						left={0}
+						display='flex'
+						justifyContent='center'
+						alignItems='center'
+						flexDirection='column'
+						style={{ background: '#fafafa' }}
+					>
+						<FontAwesomeIcon icon={faGift} size='6x' />
+						<GoToCartButton />
+					</Box>
+				) : null}
+			</Card>
+		</>
 	);
 };
 
