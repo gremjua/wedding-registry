@@ -4,6 +4,7 @@ import Loading from 'components/common/Loading';
 import UploadButton from 'components/upload/UploadButton';
 import { GiftCartContext } from 'context/GiftCartContext';
 import { TransactionContext } from 'context/TransactionContext';
+import { sendEmail } from 'net/email';
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import TransferInfo from '../components/transfer/TransferInfo';
 
@@ -24,6 +25,9 @@ const TransferConfirm = (): JSX.Element => {
 				.then(id => {
 					setTransactionId(id);
 					setAmount(currentTransaction.amount);
+
+					sendEmail(currentTransaction, id).catch(e => console.error(e));
+
 					clearTransaction();
 					clearCart(); // TODO: snackbar, "confirmaste tu regalo :tada: Solo falta que transfieras el dinero y subas el comprobante"
 				}) // TODO: send email in background, maybe vercel function
