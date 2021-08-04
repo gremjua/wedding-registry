@@ -57,7 +57,7 @@ const buildEmailForGifter = (
                         <b>Tipo y número de documento</b>: DNI 38028338
                     </div>
                     <div class="mui--text-button">
-                        <a href="${process.env.REACT_APP_VERCEL_URL}/upload/${id}">
+                        <a href="${process.env.REACT_APP_URL}/upload/${id}">
                         Subí el comprobante de transferencia
                         </a>
                     </div>
@@ -120,7 +120,7 @@ const buildEmailForCouple = (transaction: Transaction): EmailData => {
 export const sendEmailToGifter = async (
 	transaction: Transaction,
 	id: string,
-	url = `${process.env.REACT_APP_VERCEL_URL}/api/email`
+	url = `${process.env.REACT_APP_URL}/api/email`
 ): Promise<JSON> => {
 	const data = buildEmailForGifter(transaction, id);
 	const response = await fetch(url, {
@@ -140,7 +140,7 @@ export const sendEmailToGifter = async (
 
 export const sendEmailToCouple = async (
 	transaction: Transaction,
-	url = `${process.env.REACT_APP_VERCEL_URL}/api/email`
+	url = `${process.env.REACT_APP_URL}/api/email`
 ): Promise<JSON> => {
 	const data = buildEmailForCouple(transaction);
 	const response = await fetch(url, {
