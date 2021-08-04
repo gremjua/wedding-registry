@@ -7,7 +7,10 @@ export type EmailData = {
 	subject: string;
 };
 
-const buildEmail = (transaction: Transaction, id: string): EmailData => {
+const buildEmailForGifter = (
+	transaction: Transaction,
+	id: string
+): EmailData => {
 	const from = process.env.REACT_APP_EMAIL || '';
 	const { email: to } = transaction;
 
@@ -66,16 +69,60 @@ const buildEmail = (transaction: Transaction, id: string): EmailData => {
         </table>
       </body>
     </html>`;
-	const subject = '🎉  Confirmaste tu regalo para Juan y Sol 🎉 ';
+	const subject = '🎉 Confirmaste tu regalo para Juan y Sol 🎉 ';
 	return { from, to, content, subject };
 };
 
-export const sendEmail = async (
+const buildEmailForCouple = (transaction: Transaction): EmailData => {
+	const from = process.env.REACT_APP_EMAIL || '';
+	const to = 'gremjua@gmail.com'; // TODO: fetch from couples DB document
+	const content = `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+      <meta name="viewport" content="width=device-width" />
+      <!-- NOTE: external links are for testing only -->
+      <link href="//cdn.muicss.com/mui-0.10.3/email/mui-email-styletag.css" rel="stylesheet" />
+      <link href="//cdn.muicss.com/mui-0.10.3/email/mui-email-inline.css" rel="stylesheet" />
+    </head>
+    <body>
+      <table class="mui-body" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td>
+            <center>
+              <!--[if mso]><table><tr><td class="mui-container-fixed"><![endif]-->
+              <div class="mui-container">
+                  <div class="mui--text-headline">
+                      &#127881; ¡Recibiste un regalo! &#127881;
+                  </div>
+                  <div class="mui--text-body1">
+                      Recibiste un regalo de <b>${transaction.buyerName}</b> por un monto de <b>$${transaction.amount}</b> con la siguiente dedicatoria:<br />
+                      <br />
+                      <b>
+                          <i>${transaction.tag}</i>
+                      </b>
+                      <br />
+                      <br />
+                      Podés agradecerle enviandole un email a <b>${transaction.email}</b>
+                  </div>
+              </div>
+              <!--[if mso]></td></tr></table><![endif]-->
+            </center>
+          </td>
+        </tr>
+      </table>
+    </body>
+  </html>`;
+	const subject = '🎉 Recibiste un regalo 🎉 ';
+	return { from, to, content, subject };
+};
+
+export const sendEmailToGifter = async (
 	transaction: Transaction,
 	id: string,
 	url = `${process.env.REACT_APP_API_URL}/api/email`
 ): Promise<JSON> => {
-	const data = buildEmail(transaction, id);
+	const data = buildEmailForGifter(transaction, id);
 	const response = await fetch(url, {
 		method: 'POST',
 		mode: 'cors',
@@ -89,4 +136,24 @@ export const sendEmail = async (
 		body: JSON.stringify(data), // body data type must match "Content-Type" header
 	});
 	return response.json(); // parses JSON response into native JavaScript objects
+};
+
+export const sendEmailToCouple = async (
+	transaction: Transaction,
+	url = `${process.env.REACT_APP_API_URL}/api/email`
+): Promise<JSON> => {
+	const data = buildEmailForCouple(transaction);
+	const response = await fetch(url, {
+		method: 'POST',
+		mode: 'cors',
+		cache: 'no-cache',
+		credentials: 'same-origin',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		redirect: 'follow',
+		referrerPolicy: 'no-referrer',
+		body: JSON.stringify(data),
+	});
+	return response.json();
 };
