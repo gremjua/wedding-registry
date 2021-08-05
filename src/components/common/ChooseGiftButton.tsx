@@ -1,5 +1,6 @@
 import { Button } from '@material-ui/core';
-import React from 'react';
+import { CoupleContext } from 'context/CoupleContext';
+import React, { useContext } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 
 type Props = {
@@ -8,16 +9,20 @@ type Props = {
 
 const ChooseGiftButton = ({
 	message = 'Elegí un regalo',
-}: Props): JSX.Element => (
-	<Button
-		component={RouterLink}
-		to='/gifts'
-		variant='contained'
-		size='large'
-		color='primary'
-	>
-		{message}
-	</Button>
-);
+}: Props): JSX.Element => {
+	const { getCouple } = useContext(CoupleContext);
+	const { slug } = getCouple() || {};
+	return (
+		<Button
+			component={RouterLink}
+			to={`/${slug}/gifts`}
+			variant='contained'
+			size='large'
+			color='primary'
+		>
+			{message}
+		</Button>
+	);
+};
 
 export default ChooseGiftButton;

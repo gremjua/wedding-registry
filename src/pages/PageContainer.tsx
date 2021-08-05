@@ -10,6 +10,8 @@ const PageContainer = ({
 	const { fetchItems, isLoading, setIsLoading } = useContext(GiftItemsContext);
 	useEffect(() => {
 		setIsLoading(true);
+		// TODO: use useParams to get couple slug (if possible), and fetch and store its ID. Then use it in transaction context.
+		// probably need to add function in TransactionContext to set couple ID
 		fetchItems().finally(() => {
 			setIsLoading(false);
 		});

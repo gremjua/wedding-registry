@@ -2,6 +2,7 @@ import { Box, Container, Typography } from '@material-ui/core';
 import ChooseGiftButton from 'components/common/ChooseGiftButton';
 import Loading from 'components/common/Loading';
 import UploadButton from 'components/upload/UploadButton';
+import { CoupleContext } from 'context/CoupleContext';
 import { GiftCartContext } from 'context/GiftCartContext';
 import { TransactionContext } from 'context/TransactionContext';
 import { sendEmailToGifter } from 'net/email';
@@ -12,6 +13,8 @@ const TransferConfirm = (): JSX.Element => {
 	const { getTransaction, clearTransaction, storeTransaction } =
 		useContext(TransactionContext);
 	const { clearCart } = useContext(GiftCartContext);
+	const { getCouple } = useContext(CoupleContext);
+	const couple = getCouple();
 	const [transactionId, setTransactionId] = useState<string>();
 	const [amount, setAmount] = useState<number>();
 	const [isLoading, setIsLoading] = useState(false);
@@ -19,14 +22,16 @@ const TransferConfirm = (): JSX.Element => {
 	const currentTransaction = getTransaction();
 
 	useEffect(() => {
-		if (currentTransaction) {
+		if (currentTransaction && couple) {
 			setIsLoading(true);
-			storeTransaction(currentTransaction)
+			storeTransaction(currentTransaction, couple.id)
 				.then(id => {
 					setTransactionId(id);
 					setAmount(currentTransaction.amount);
 
-					sendEmailToGifter(currentTransaction, id).catch(e => console.error(e));
+					sendEmailToGifter(currentTransaction, id, couple).catch(e =>
+						console.error(e)
+					);
 
 					clearTransaction();
 					clearCart(); // TODO: snackbar, "confirmaste tu regalo :tada: Solo falta que transfieras el dinero y subas el comprobante"

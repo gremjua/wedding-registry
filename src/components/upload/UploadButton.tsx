@@ -1,4 +1,5 @@
 import { Button } from '@material-ui/core';
+import { CoupleContext } from 'context/CoupleContext';
 import { TransactionContext } from 'context/TransactionContext';
 import { sendEmailToCouple } from 'net/email';
 import React, { useContext } from 'react';
@@ -12,18 +13,27 @@ type Props = {
 const UploadButton = ({ transactionId, voucherRef }: Props): JSX.Element => {
 	const { approveTransaction, fetchTransaction } =
 		useContext(TransactionContext);
+	const { getCouple } = useContext(CoupleContext);
+	const {
+		id: coupleId,
+		email,
+		slug,
+	} = getCouple() || {
+		id: 'noCoupleId',
+		email: 'noEmail',
+	};
 	const history = useHistory();
 	const doUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
 		console.log(e.target.files);
 		// TODO: upload file to firebase, if successful then notify/set transaction to approved
-		return approveTransaction(transactionId).then(result => {
+		return approveTransaction(transactionId, coupleId).then(result => {
 			if (result) {
-				fetchTransaction(transactionId)
+				fetchTransaction(transactionId, coupleId)
 					.then(transaction => {
-						sendEmailToCouple(transaction).catch(err => console.error(err));
+						sendEmailToCouple(transaction, email).catch(err => console.error(err));
 					})
 					.catch(error => console.error(error));
-				history.push('/thanks');
+				history.push(`/${slug}/thanks`);
 			} else {
 				console.error('Error uploading transaction receipt.');
 			}

@@ -1,17 +1,23 @@
 import { Button } from '@material-ui/core';
-import React from 'react';
+import { CoupleContext } from 'context/CoupleContext';
+import React, { useContext } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 
-const GoToCartButton = (): JSX.Element => (
-	<Button
-		component={RouterLink}
-		to='/giftCart'
-		variant='contained'
-		size='small'
-		color='primary'
-	>
-		Ir al carrito
-	</Button>
-);
+const GoToCartButton = (): JSX.Element => {
+	const { getCouple } = useContext(CoupleContext);
+	const { slug } = getCouple() || {};
+
+	return (
+		<Button
+			component={RouterLink}
+			to={`/${slug}/giftCart`}
+			variant='contained'
+			size='small'
+			color='primary'
+		>
+			Ir al carrito
+		</Button>
+	);
+};
 
 export default GoToCartButton;

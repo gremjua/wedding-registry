@@ -1,5 +1,6 @@
 import { Box, Button, Container, Typography } from '@material-ui/core';
 import ChooseGiftButton from 'components/common/ChooseGiftButton';
+import { CoupleContext } from 'context/CoupleContext';
 import { TransactionContext } from 'context/TransactionContext';
 import React, { useContext, useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
@@ -8,6 +9,8 @@ const Transfer = (): JSX.Element => {
 	// const [isError, setIsError] = useState(false);
 	const { getTransaction } = useContext(TransactionContext);
 	const transaction = getTransaction();
+	const { getCouple } = useContext(CoupleContext);
+	const { slug } = getCouple() || {};
 	return (
 		<Container>
 			<Box my='20px' display='flex' flexDirection='column' alignItems='center'>
@@ -30,7 +33,7 @@ const Transfer = (): JSX.Element => {
 						<Box my='10px'>
 							<Button
 								component={RouterLink}
-								to='/transfer/confirm'
+								to={`/${slug}/transfer/confirm`}
 								variant='contained'
 								color='primary'
 							>

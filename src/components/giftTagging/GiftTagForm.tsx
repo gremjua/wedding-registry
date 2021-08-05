@@ -10,6 +10,7 @@ import { Formik, Form, Field } from 'formik';
 import { TextField } from 'formik-material-ui';
 import { useHistory } from 'react-router-dom';
 import { Transaction, TransactionContext } from 'context/TransactionContext';
+import { CoupleContext } from 'context/CoupleContext';
 
 const initialValues = {
 	tag: '',
@@ -72,6 +73,8 @@ const GiftTagForm = (props: Props): JSX.Element => {
 	const { amount } = props;
 	const history = useHistory();
 	const { setTransaction } = useContext(TransactionContext);
+	const { getCouple } = useContext(CoupleContext);
+	const { slug } = getCouple() || {};
 	const validateForm = (values: any) => {
 		const errors: { [index: string]: string } = Object.keys(values).reduce(
 			(accErrors, field) => {
@@ -94,7 +97,7 @@ const GiftTagForm = (props: Props): JSX.Element => {
 				console.log(values);
 				setTransaction(values as Transaction);
 				setSubmitting(false);
-				history.push('/transfer');
+				history.push(`/${slug}/transfer`);
 			}}
 		>
 			{({ submitForm, isSubmitting }) => (

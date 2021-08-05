@@ -1,3 +1,4 @@
+import { Couple } from 'context/CoupleContext';
 import { Transaction } from 'context/TransactionContext';
 
 export type EmailData = {
@@ -9,7 +10,8 @@ export type EmailData = {
 
 const buildEmailForGifter = (
 	transaction: Transaction,
-	id: string
+	transactionId: string,
+	couple: Couple
 ): EmailData => {
 	const from = process.env.REACT_APP_EMAIL || '';
 	const { email: to } = transaction;
@@ -34,30 +36,25 @@ const buildEmailForGifter = (
                         &#127881; ¡Confirmaste tu regalo! &#127881;
                     </div>
                     <div class="mui--text-body1">
-                        El ID de tu regalo es: <b>${id}</b>.<br />
+                        El ID de tu regalo es: <b>${transactionId}</b>.<br />
                         Hacé la transferencia de <b>$${transaction.amount}</b> a la siguiente cuenta y recordá <b>subir el comprobante</b>:
                         <br />
                         <b>
-                            <i>Banco Santander</i>
+                            <i>${couple.bank.name}</i>
                         </b>
-                        <br />
-                        <b>Tipo y número de cuenta</b>: Cuenta en Pesos 169-013821/9
                         <br />
                         <b>Número de CBU</b>:
                         <input
                             readOnly
-                            value='0720169788000001382190'
+                            value='${couple.bank.cbu}'
                             style="width:172px; border:none;"
                         />
                         <br />
-                        <b>Alias de CBU</b>: VOLCAN.JARDIN.ABRIL
+                        <b>Alias de CBU</b>: ${couple.bank.alias}
                         <br />
-                        <b>Titular de la cuenta</b>: Gremes Cordero Juan Agustin
-                        <br />
-                        <b>Tipo y número de documento</b>: DNI 38028338
                     </div>
                     <div class="mui--text-button">
-                        <a href="${process.env.REACT_APP_URL}/upload/${id}">
+                        <a href="${process.env.REACT_APP_URL}/${couple.slug}/upload/${transactionId}">
                         Subí el comprobante de transferencia
                         </a>
                     </div>
@@ -69,13 +66,16 @@ const buildEmailForGifter = (
         </table>
       </body>
     </html>`;
-	const subject = '🎉 Confirmaste tu regalo para Juan y Sol 🎉 ';
+	const subject = `🎉 Confirmaste tu regalo para ${couple.title} 🎉 `;
 	return { from, to, content, subject };
 };
 
-const buildEmailForCouple = (transaction: Transaction): EmailData => {
+const buildEmailForCouple = (
+	transaction: Transaction,
+	coupleEmail: string
+): EmailData => {
 	const from = process.env.REACT_APP_EMAIL || '';
-	const to = 'gremjua@gmail.com'; // TODO: fetch from couples DB document
+	const to = coupleEmail;
 	const content = `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
   <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
@@ -120,9 +120,10 @@ const buildEmailForCouple = (transaction: Transaction): EmailData => {
 export const sendEmailToGifter = async (
 	transaction: Transaction,
 	id: string,
+	couple: Couple,
 	url = `${process.env.REACT_APP_URL}/api/email`
 ): Promise<JSON> => {
-	const data = buildEmailForGifter(transaction, id);
+	const data = buildEmailForGifter(transaction, id, couple);
 	const response = await fetch(url, {
 		method: 'POST',
 		mode: 'cors',
@@ -140,9 +141,10 @@ export const sendEmailToGifter = async (
 
 export const sendEmailToCouple = async (
 	transaction: Transaction,
+	coupleEmail: string,
 	url = `${process.env.REACT_APP_URL}/api/email`
 ): Promise<JSON> => {
-	const data = buildEmailForCouple(transaction);
+	const data = buildEmailForCouple(transaction, coupleEmail);
 	const response = await fetch(url, {
 		method: 'POST',
 		mode: 'cors',

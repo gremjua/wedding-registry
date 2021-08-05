@@ -1,5 +1,6 @@
 import { Box, Container, Typography } from '@material-ui/core';
 import UploadButton from 'components/upload/UploadButton';
+import { CoupleContext } from 'context/CoupleContext';
 import { TransactionContext, DBTransaction } from 'context/TransactionContext';
 import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
@@ -11,9 +12,11 @@ interface IParams {
 const Upload = (): JSX.Element | null => {
 	const { transactionId } = useParams<IParams>();
 	const { fetchTransaction } = useContext(TransactionContext);
+	const { getCouple } = useContext(CoupleContext);
+	const { id: coupleId } = getCouple() || { id: 'noCoupleId' };
 	const [transactionDetails, setTransactionDetails] = useState<DBTransaction>();
 	useEffect(() => {
-		fetchTransaction(transactionId)
+		fetchTransaction(transactionId, coupleId)
 			.then(transaction => {
 				setTransactionDetails(transaction);
 			})

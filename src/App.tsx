@@ -14,6 +14,9 @@ import Transfer from 'pages/Transfer';
 import Upload from 'pages/Upload';
 import TransferConfirm from 'pages/TransferConfirm';
 import Thanks from 'pages/Thanks';
+import { CoupleProvider } from 'context/CoupleContext';
+import AppContainer from 'pages/AppContainer';
+import PageRouter from 'components/router/PageRouter';
 
 function App(): JSX.Element {
 	const [headerCollapsed, setHeaderCollapsed] = useState(true);
@@ -21,80 +24,24 @@ function App(): JSX.Element {
 		<div className='App'>
 			<GiftCartProvider>
 				<TransactionProvider>
-					<BrowserRouter>
-						<ScrollTop />
-						<NavBar collapse={headerCollapsed} />
-						<GiftItemsProvider>
-							<PageContainer>
+					<GiftItemsProvider>
+						<CoupleProvider>
+							<BrowserRouter>
 								<Switch>
 									<Route
-										exact
-										path='/'
-										render={() => {
-											setHeaderCollapsed(false);
-											return <Main />;
-										}}
-									/>
-									<Route
-										exact
-										path='/gifts'
-										render={() => {
-											setHeaderCollapsed(true);
-											return <Gifts />;
-										}}
-									/>
-									<Route
-										exact
-										path='/giftTagging/:giftKind'
-										render={() => {
-											setHeaderCollapsed(true);
-											return <GiftTagging />;
-										}}
-									/>
-									<Route
-										exact
-										path='/giftCart'
-										render={() => {
-											setHeaderCollapsed(true);
-											return <GiftCart />;
-										}}
-									/>
-									<Route
-										exact
-										path='/transfer'
-										render={() => {
-											setHeaderCollapsed(true);
-											return <Transfer />;
-										}}
-									/>
-									<Route
-										exact
-										path='/transfer/confirm'
-										render={() => {
-											setHeaderCollapsed(true);
-											return <TransferConfirm />;
-										}}
-									/>
-									<Route
-										exact
-										path='/upload/:transactionId'
-										render={() => {
-											setHeaderCollapsed(true);
-											return <Upload />;
-										}}
-									/>
-									<Route
-										exact
-										path='/thanks'
-										render={() => {
-											setHeaderCollapsed(true);
-											return <Thanks />;
-										}}
+										path='/:coupleSlug'
+										render={() => (
+											<AppContainer>
+												<ScrollTop />
+												<NavBar />
+												<PageRouter />
+											</AppContainer>
+										)}
 									/>
 								</Switch>
-							</PageContainer>
-						</GiftItemsProvider>
-					</BrowserRouter>
+							</BrowserRouter>
+						</CoupleProvider>
+					</GiftItemsProvider>
 				</TransactionProvider>
 			</GiftCartProvider>
 		</div>

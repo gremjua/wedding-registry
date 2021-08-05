@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Collapse from '@material-ui/core/Collapse';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -9,9 +9,10 @@ import Fab from '@material-ui/core/Fab';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronUp } from '@fortawesome/free-solid-svg-icons';
 import ScrollTop from 'components/navBar/ScrollTop';
-import headerImage from 'images/juanYSol.jpg';
 import pretzel from 'images/pretzel2.svg';
 import './index.css';
+import { CoupleContext } from 'context/CoupleContext';
+import { useRouteMatch } from 'react-router-dom';
 import GiftCartWidget from './GiftCartWidget';
 
 type NavBarProps = {
@@ -20,27 +21,29 @@ type NavBarProps = {
 	 */
 	window?: () => Window;
 	children?: React.ReactElement;
-	collapse: boolean;
 };
 
 const NavBar = (props: NavBarProps): JSX.Element => {
-	const { collapse } = props;
+	const { getCouple } = useContext(CoupleContext);
+	const { headerImgUrl, title, slug } = getCouple() || {};
+	const { path } = useRouteMatch();
+	const isMainCouplePage = path.split('/').length === 2; // path === /:coupleSlug
 	return (
 		<>
 			<div id='back-to-top-anchor' />
 			<ElevationScroll {...props}>
-				<AppBar position={!collapse ? 'relative' : 'sticky'}>
+				<AppBar position={isMainCouplePage ? 'relative' : 'sticky'}>
 					<Box className='headerContainer'>
 						<Toolbar style={{ width: '100%' }}>
 							<Typography variant='h6' align='center' style={{ width: '100%' }}>
-								Juan & Sol
+								{title}
 							</Typography>
-							<GiftCartWidget />
+							<GiftCartWidget slug={slug || ''} />
 						</Toolbar>
 
-						<Collapse in={!collapse}>
+						<Collapse in={isMainCouplePage}>
 							<Box className='headerImageContainer'>
-								<img src={headerImage} alt='Juan and Sol' className='headerImage' />
+								<img src={headerImgUrl} alt={title} className='headerImage' />
 							</Box>
 						</Collapse>
 						<Box className='logoContainer'>

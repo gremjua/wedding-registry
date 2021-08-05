@@ -3,10 +3,13 @@ import ChooseGiftButton from 'components/common/ChooseGiftButton';
 import { GiftCartContext } from 'context/GiftCartContext';
 import { Link as RouterLink } from 'react-router-dom';
 import React, { useContext } from 'react';
+import { CoupleContext } from 'context/CoupleContext';
 
 const CartFooter = (): JSX.Element => {
 	const { getTotals } = useContext(GiftCartContext);
 	const { totalPrice } = getTotals();
+	const { getCouple } = useContext(CoupleContext);
+	const { slug } = getCouple() || {};
 	return (
 		<Grid
 			container
@@ -41,7 +44,7 @@ const CartFooter = (): JSX.Element => {
 					<Grid item xs={12}>
 						<Button
 							component={RouterLink}
-							to='/giftTagging/cart'
+							to={`/${slug}/giftTagging/cart`}
 							variant='contained'
 							size='large'
 							color='secondary'

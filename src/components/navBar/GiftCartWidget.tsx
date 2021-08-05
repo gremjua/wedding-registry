@@ -5,14 +5,14 @@ import { faGifts } from '@fortawesome/free-solid-svg-icons';
 import { Link as RouterLink } from 'react-router-dom';
 import { GiftCartContext } from 'context/GiftCartContext';
 
-const GiftCartWidget = (): JSX.Element | null => {
+const GiftCartWidget = ({ slug }: { slug: string }): JSX.Element | null => {
 	const { getGiftCart } = useContext(GiftCartContext);
 	const giftCart = getGiftCart();
 	return giftCart.length ? (
 		<IconButton
 			style={{ position: 'absolute', right: '0px' }}
 			component={RouterLink}
-			to='/giftCart'
+			to={`/${slug}/giftCart`}
 			color='inherit'
 			aria-label='view gift cart'
 		>
