@@ -9,7 +9,6 @@ import Fab from '@material-ui/core/Fab';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronUp } from '@fortawesome/free-solid-svg-icons';
 import ScrollTop from 'components/navBar/ScrollTop';
-import pretzel from 'images/pretzel2.svg';
 import './index.css';
 import { CoupleContext } from 'context/CoupleContext';
 import { useRouteMatch } from 'react-router-dom';
@@ -47,7 +46,7 @@ const NavBar = (props: NavBarProps): JSX.Element => {
 							</Box>
 						</Collapse>
 						<Box className='logoContainer'>
-							<img src={pretzel} alt='Pretzel' className='logo' />
+							<img src='/images/pretzel2.svg' alt='Pretzel' className='logo' />
 						</Box>
 					</Box>
 				</AppBar>
