@@ -11,7 +11,6 @@ import { faChevronUp } from '@fortawesome/free-solid-svg-icons';
 import ScrollTop from 'components/navBar/ScrollTop';
 import './index.css';
 import { CoupleContext } from 'context/CoupleContext';
-import { useRouteMatch } from 'react-router-dom';
 import GiftCartWidget from './GiftCartWidget';
 
 type NavBarProps = {
@@ -19,19 +18,19 @@ type NavBarProps = {
 	 * Injected to work in an iframe.
 	 */
 	window?: () => Window;
+	collapse: boolean;
 	children?: React.ReactElement;
 };
 
 const NavBar = (props: NavBarProps): JSX.Element => {
 	const { getCouple } = useContext(CoupleContext);
 	const { headerImgUrl, title, slug } = getCouple() || {};
-	const { path } = useRouteMatch();
-	const isMainCouplePage = path.split('/').length === 2; // path === /:coupleSlug
+	const { collapse } = props;
 	return (
 		<>
 			<div id='back-to-top-anchor' />
 			<ElevationScroll {...props}>
-				<AppBar position={isMainCouplePage ? 'relative' : 'sticky'}>
+				<AppBar position={collapse ? 'relative' : 'sticky'}>
 					<Box className='headerContainer'>
 						<Toolbar style={{ width: '100%' }}>
 							<Typography variant='h6' align='center' style={{ width: '100%' }}>
@@ -40,7 +39,7 @@ const NavBar = (props: NavBarProps): JSX.Element => {
 							<GiftCartWidget slug={slug || ''} />
 						</Toolbar>
 
-						<Collapse in={isMainCouplePage}>
+						<Collapse in={collapse}>
 							<Box className='headerImageContainer'>
 								<img src={headerImgUrl} alt={title} className='headerImage' />
 							</Box>

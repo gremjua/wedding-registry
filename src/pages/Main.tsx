@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Box, Button, Container } from '@material-ui/core';
-import { Link as RouterLink, useRouteMatch } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 import ChooseGiftButton from 'components/common/ChooseGiftButton';
+import { CoupleContext } from 'context/CoupleContext';
 
 const Main = (): JSX.Element => {
-	const { url } = useRouteMatch();
+	const { getCouple } = useContext(CoupleContext);
+	const { slug } = getCouple() || {};
 	return (
 		<Container>
 			<Box my='20px' display='flex' flexDirection='column' alignItems='center'>
@@ -14,7 +16,7 @@ const Main = (): JSX.Element => {
 				<Box my='10px'>
 					<Button
 						component={RouterLink}
-						to={`${url}/giftTagging/money`}
+						to={`/${slug}/giftTagging/money`}
 						variant='contained'
 						size='large'
 						color='primary'
