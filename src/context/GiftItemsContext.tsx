@@ -6,7 +6,7 @@ import { fetchMockItems } from './mocks';
 
 type GiftItemsContextProps = {
 	getItems: () => Gift[];
-	fetchItems: () => Promise<void>;
+	fetchItems: (coupleId: string) => Promise<void>;
 	isLoading: boolean;
 	setIsLoading: (status: boolean) => void;
 };
@@ -23,11 +23,13 @@ export const GiftItemsProvider = ({
 
 	const getItems = () => items;
 	// fetch items from DB or mock items
-	const doFetchItems: () => Promise<Gift[]> = process.env.REACT_APP_USE_MOCKS
+	const doFetchItems: (coupleId: string) => Promise<Gift[]> = process.env
+		.REACT_APP_USE_MOCKS
 		? fetchMockItems
 		: fetchItemsDB;
 	// process.env.USE_MOCKS ? getMockItems : getDbItems;
-	const fetchItems = () => doFetchItems().then(gifts => setItems(gifts));
+	const fetchItems = (coupleId: string) =>
+		doFetchItems(coupleId).then(gifts => setItems(gifts));
 
 	return (
 		<GiftItemsContext.Provider
