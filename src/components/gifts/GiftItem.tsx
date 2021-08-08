@@ -4,6 +4,7 @@ import {
 	CardActionArea,
 	CardContent,
 	CardMedia,
+	Grow,
 	Typography,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
@@ -42,41 +43,43 @@ const GiftItem = (props: Props): JSX.Element => {
 
 	return (
 		<>
-			<Card className={classes.root} onClick={() => addGiftToCart(item)}>
-				{/* If isInCart => mark as in cart */}
-				<CardActionArea className={classes.action}>
-					<CardMedia
-						className={classes.media}
-						image={item.imageUrl}
-						title={item.name}
-					/>
-					<CardContent>
-						<Typography gutterBottom variant='body1' component='h2' align='center'>
-							{item.name}
-						</Typography>
-						<Typography variant='subtitle1' color='textSecondary' align='center'>
-							{`AR$ ${item.price.toLocaleString('es-ar')}`}
-						</Typography>
-					</CardContent>
-				</CardActionArea>
-				{isInCart(item) ? (
-					<Box
-						position='absolute'
-						width='100%'
-						height='100%'
-						top={0}
-						left={0}
-						display='flex'
-						justifyContent='center'
-						alignItems='center'
-						flexDirection='column'
-						style={{ background: '#fafafa' }}
-					>
-						<FontAwesomeIcon icon={faGift} size='6x' />
-						<GoToCartButton />
-					</Box>
-				) : null}
-			</Card>
+			<Grow in timeout={1000}>
+				<Card className={classes.root} onClick={() => addGiftToCart(item)}>
+					{/* If isInCart => mark as in cart */}
+					<CardActionArea className={classes.action}>
+						<CardMedia
+							className={classes.media}
+							image={item.imageUrl}
+							title={item.name}
+						/>
+						<CardContent>
+							<Typography gutterBottom variant='body1' component='h2' align='center'>
+								{item.name}
+							</Typography>
+							<Typography variant='subtitle1' color='textSecondary' align='center'>
+								{`AR$ ${item.price.toLocaleString('es-ar')}`}
+							</Typography>
+						</CardContent>
+					</CardActionArea>
+					{isInCart(item) ? (
+						<Box
+							position='absolute'
+							width='100%'
+							height='100%'
+							top={0}
+							left={0}
+							display='flex'
+							justifyContent='center'
+							alignItems='center'
+							flexDirection='column'
+							style={{ background: '#fafafa' }}
+						>
+							<FontAwesomeIcon icon={faGift} size='6x' />
+							<GoToCartButton />
+						</Box>
+					) : null}
+				</Card>
+			</Grow>
 		</>
 	);
 };

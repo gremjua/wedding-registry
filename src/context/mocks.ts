@@ -1,7 +1,7 @@
 import { Gift } from 'components/gifts/types';
-import percheroNordico from 'images/gifts/percheroNordico.jpg';
 import { DBTransaction, Transaction } from './TransactionContext';
 
+const percheroNordico = '/images/gifts/percheroNordico.jpg';
 const gifts: Gift[] = [
 	{
 		id: '1',
