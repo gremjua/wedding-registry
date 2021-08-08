@@ -37,7 +37,9 @@ const buildEmailForGifter = (
                     </div>
                     <div class="mui--text-body1">
                         El ID de tu regalo es: <b>${transactionId}</b>.<br />
-                        Hacé la transferencia de <b>$${transaction.amount}</b> a la siguiente cuenta y recordá <b>subir el comprobante</b>:
+                        Hacé la transferencia de <b>$${transaction.amount.toLocaleString(
+																									'es-ar'
+																								)}</b> a la siguiente cuenta y recordá <b>subir el comprobante</b>:
                         <br />
                         <b>
                             <i>${couple.bank.name}</i>
@@ -54,7 +56,9 @@ const buildEmailForGifter = (
                         <br />
                     </div>
                     <div class="mui--text-button">
-                        <a href="${process.env.REACT_APP_URL}/${couple.slug}/upload/${transactionId}">
+                        <a href="${process.env.REACT_APP_URL}/${
+		couple.slug
+	}/upload/${transactionId}">
                         Subí el comprobante de transferencia
                         </a>
                     </div>
@@ -96,14 +100,20 @@ const buildEmailForCouple = (
                       &#127881; ¡Recibiste un regalo! &#127881;
                   </div>
                   <div class="mui--text-body1">
-                      Recibiste un regalo de <b>${transaction.buyerName}</b> por un monto de <b>$${transaction.amount}</b> con la siguiente dedicatoria:<br />
+                      Recibiste un regalo de <b>${
+																							transaction.buyerName
+																						}</b> por un monto de <b>$${transaction.amount.toLocaleString(
+		'es-ar'
+	)}</b> con la siguiente dedicatoria:<br />
                       <br />
                       <b>
                           <i>${transaction.tag}</i>
                       </b>
                       <br />
                       <br />
-                      Podés agradecerle enviandole un email a <b>${transaction.email}</b>
+                      Podés agradecerle enviandole un email a <b>${
+																							transaction.email
+																						}</b>
                   </div>
               </div>
               <!--[if mso]></td></tr></table><![endif]-->

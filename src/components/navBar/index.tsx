@@ -2,7 +2,6 @@ import React, { useContext } from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Collapse from '@material-ui/core/Collapse';
 import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import ElevationScroll from 'components/navBar/ElevationScroll';
 import Fab from '@material-ui/core/Fab';
@@ -32,10 +31,12 @@ const NavBar = (props: NavBarProps): JSX.Element => {
 			<ElevationScroll {...props}>
 				<AppBar position={collapse ? 'relative' : 'sticky'}>
 					<Box className='headerContainer'>
-						<Toolbar style={{ width: '100%' }}>
-							<Typography variant='h6' align='center' style={{ width: '100%' }}>
-								{title}
-							</Typography>
+						<Toolbar style={{ width: '100%', height: '100px', overflow: 'hidden' }}>
+							<img
+								src='/images/pretzelsLogo2.png'
+								alt='Pretzels logo'
+								style={{ width: '280px', position: 'absolute', left: 0 }}
+							/>
 							<GiftCartWidget slug={slug || ''} />
 						</Toolbar>
 
@@ -44,9 +45,6 @@ const NavBar = (props: NavBarProps): JSX.Element => {
 								<img src={headerImgUrl} alt={title} className='headerImage' />
 							</Box>
 						</Collapse>
-						<Box className='logoContainer'>
-							<img src='/images/pretzel2.svg' alt='Pretzel' className='logo' />
-						</Box>
 					</Box>
 				</AppBar>
 			</ElevationScroll>

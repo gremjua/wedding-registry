@@ -4,11 +4,16 @@ import App from 'App';
 import reportWebVitals from 'reportWebVitals';
 import '@fontsource/roboto';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import { MuiThemeProvider } from '@material-ui/core';
+import theme from 'themes/main';
+import './index.css';
 
 ReactDOM.render(
 	<React.StrictMode>
-		<CssBaseline />
-		<App />
+		<MuiThemeProvider theme={theme}>
+			<CssBaseline />
+			<App />
+		</MuiThemeProvider>
 	</React.StrictMode>,
 	document.getElementById('root')
 );
