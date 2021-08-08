@@ -18,7 +18,7 @@ const AppContainer = ({
 		fetchCoupleBySlug(coupleSlug).then(couple => {
 			if (couple) {
 				setCouple(couple);
-				fetchItems().finally(() => {
+				fetchItems(couple.id).finally(() => {
 					setIsLoading(false);
 				});
 			} else {
