@@ -39,7 +39,7 @@ const NavBar = (props: NavBarProps): JSX.Element => {
 							<GiftCartWidget slug={slug || ''} />
 						</Toolbar>
 
-						<Collapse in={collapse}>
+						<Collapse in={collapse} timeout={500}>
 							<Box className='headerImageContainer'>
 								<img src={headerImgUrl} alt={title} className='headerImage' />
 							</Box>
