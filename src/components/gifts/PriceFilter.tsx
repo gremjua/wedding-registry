@@ -70,7 +70,7 @@ const PriceFilter = ({ handleFilter }: Props): JSX.Element => {
 
 	return (
 		<Box width='80%'>
-			<Typography id='price-filter' gutterBottom>
+			<Typography id='price-filter' variant='button' style={{ fontWeight: 900 }}>
 				Filtra por precio
 			</Typography>
 			<Slider
