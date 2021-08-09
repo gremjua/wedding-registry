@@ -20,6 +20,10 @@ const sliderValues = [
 		label: '$1k',
 	},
 	{
+		value: 5000,
+		label: '$5k',
+	},
+	{
 		value: 10000,
 		label: '$10k',
 	},
@@ -28,12 +32,8 @@ const sliderValues = [
 		label: '$50k',
 	},
 	{
-		value: 100000,
-		label: '$100k',
-	},
-	{
-		value: 1000000,
-		label: '$1M',
+		value: 200000,
+		label: '$200k',
 	},
 ];
 
@@ -44,11 +44,11 @@ const marks = [
 	},
 	{
 		value: 2,
-		label: '$50000',
+		label: '$10000',
 	},
 	{
 		value: 4,
-		label: '$1M',
+		label: '$200000',
 	},
 ];
 
