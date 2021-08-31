@@ -3,13 +3,14 @@ import { getFireStore, getTimestamp } from 'db';
 
 export const storeTransactionDB = (
 	newTransaction: Transaction,
-	coupleId: string
+	coupleId: string,
+	status = 'pending'
 ): Promise<string> => {
 	const db = getFireStore();
 	const transactions = db.collection(`couples/${coupleId}/transactions`);
 	const actualTransaction = {
 		...newTransaction,
-		status: 'pending',
+		status,
 		timestamp: getTimestamp(),
 	};
 	return transactions.add(actualTransaction).then(({ id }) => id);

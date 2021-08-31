@@ -1,7 +1,8 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import {
 	Box,
 	Button,
+	ButtonGroup,
 	Grid,
 	InputAdornment,
 	Typography,
@@ -11,6 +12,7 @@ import { TextField } from 'formik-material-ui';
 import { useHistory } from 'react-router-dom';
 import { Transaction, TransactionContext } from 'context/TransactionContext';
 import { CoupleContext } from 'context/CoupleContext';
+import { createMercadoPagoOrder } from 'net/mercadopago';
 
 const initialValues = {
 	tag: '',
@@ -65,6 +67,8 @@ const validate: { [index: string]: (name: string) => string | null } = {
 		requiredValidation('Monto', amount) || numberValidation('Monto', amount),
 };
 
+type PaymentMethod = 'mp' | 'tr';
+
 type Props = {
 	amount?: number;
 };
@@ -72,9 +76,10 @@ type Props = {
 const GiftTagForm = (props: Props): JSX.Element => {
 	const { amount } = props;
 	const history = useHistory();
+	const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>();
 	const { setTransaction } = useContext(TransactionContext);
 	const { getCouple } = useContext(CoupleContext);
-	const { slug } = getCouple() || {};
+	const couple = getCouple();
 	const validateForm = (values: any) => {
 		const errors: { [index: string]: string } = Object.keys(values).reduce(
 			(accErrors, field) => {
@@ -97,7 +102,17 @@ const GiftTagForm = (props: Props): JSX.Element => {
 				console.log(values);
 				setTransaction(values as Transaction);
 				setSubmitting(false);
-				history.push(`/${slug}/transfer`);
+				if (couple?.slug) {
+					if (paymentMethod === 'tr') {
+						history.push(`/${couple.slug}/transfer`);
+					} else if (paymentMethod === 'mp') {
+						createMercadoPagoOrder(couple, values as Transaction)
+							.then(url => {
+								window.location.replace(url);
+							})
+							.catch(error => console.error(error));
+					}
+				}
 			}}
 		>
 			{({ submitForm, isSubmitting }) => (
@@ -164,14 +179,37 @@ const GiftTagForm = (props: Props): JSX.Element => {
 						<Typography variant='body1' gutterBottom>
 							Elegí el método de pago:
 						</Typography>
-						<Button
+						<ButtonGroup
+							orientation='vertical'
 							color='primary'
+							aria-label='vertical contained primary button group'
 							variant='contained'
-							onClick={submitForm}
-							disabled={isSubmitting}
 						>
-							Transferencia bancaria
-						</Button>
+							<Button
+								color='primary'
+								variant='contained'
+								onClick={() => {
+									setPaymentMethod('tr');
+									submitForm();
+								}}
+								disabled={isSubmitting}
+							>
+								Transferencia bancaria
+							</Button>
+							{couple?.mp ? (
+								<Button
+									color='primary'
+									variant='contained'
+									onClick={() => {
+										setPaymentMethod('mp');
+										submitForm();
+									}}
+									disabled={isSubmitting}
+								>
+									Mercadopago
+								</Button>
+							) : null}
+						</ButtonGroup>
 					</Box>
 				</Form>
 			)}
