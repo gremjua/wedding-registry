@@ -13,6 +13,7 @@ export type Couple = {
 	headerImgUrl: string;
 	email: string;
 	bank: Bank;
+	mp: boolean; // TODO: contain MP credentials perhaps
 };
 
 export type DBCouple = Couple & {
