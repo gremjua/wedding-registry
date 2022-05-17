@@ -1,5 +1,6 @@
 import { Gift } from 'components/gifts/types';
 import { DBTransaction, Transaction } from './TransactionContext';
+import { DBCouple } from './CoupleContext';
 
 const percheroNordico = '/images/gifts/percheroNordico.jpg';
 const gifts: Gift[] = [
@@ -34,6 +35,20 @@ const gifts: Gift[] = [
 		imageUrl: percheroNordico,
 	},
 ];
+
+const couple: DBCouple = {
+	id: 'testId',
+	slug: 'testSlug',
+	title: 'Test 1 and Test 2',
+	headerImgUrl: '/images/juanYSol.jpg',
+	email: 'test@gmail.com',
+	bank: {
+		alias: 'test.alias',
+		cbu: '000022229999',
+		name: 'Test Bank',
+	},
+	mp: true,
+};
 
 export const fetchMockItems = (): Promise<Gift[]> =>
 	new Promise(resolve => {
@@ -72,5 +87,12 @@ export const updateMockTransaction = (t: DBTransaction): Promise<boolean> =>
 	new Promise(resolve => {
 		setTimeout(() => {
 			resolve(true);
+		}, 2000);
+	});
+
+export const fetchMockCoupleBySlug = (slug: string): Promise<DBCouple> =>
+	new Promise(resolve => {
+		setTimeout(() => {
+			resolve(couple);
 		}, 2000);
 	});
