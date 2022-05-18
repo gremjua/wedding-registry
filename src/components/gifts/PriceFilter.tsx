@@ -60,7 +60,7 @@ const PriceFilter = ({ handleFilter }: Props): JSX.Element => {
 		0,
 		sliderValues.length - 1,
 	]);
-	const handleChange = (event: any, newValue: number | number[]) => {
+	const handleChange = (event: unknown, newValue: number | number[]) => {
 		setValue(newValue as number[]);
 		handleFilter({
 			min: sliderValues[(newValue as number[])[0]].value,

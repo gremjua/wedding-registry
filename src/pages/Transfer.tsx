@@ -2,7 +2,7 @@ import { Box, Button, Container, Typography } from '@material-ui/core';
 import ChooseGiftButton from 'components/common/ChooseGiftButton';
 import { CoupleContext } from 'context/CoupleContext';
 import { TransactionContext } from 'context/TransactionContext';
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 
 const Transfer = (): JSX.Element => {

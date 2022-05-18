@@ -86,7 +86,7 @@ export const TransactionProvider = ({
 				const approvedTransaction: DBTransaction = { ...t, status: 'success' };
 				return updateTransaction(approvedTransaction, coupleId);
 			})
-			.catch(error => false);
+			.catch(_error => false);
 
 	return (
 		<TransactionContext.Provider

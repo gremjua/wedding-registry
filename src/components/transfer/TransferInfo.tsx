@@ -14,7 +14,7 @@ const TransferInfo = ({
 	useEffect(() => {
 		voucherRef.current?.focus();
 	}, []);
-	const copyToClipboard = (e: any) => {
+	const copyToClipboard = (_e: unknown) => {
 		cbuRef.current?.select();
 		document.execCommand('copy');
 		voucherRef.current?.focus();

@@ -14,9 +14,10 @@ const firebaseConfig = {
 const app = firebase.initializeApp(firebaseConfig);
 // firebase.analytics();
 
-export const getFireBase = () => app;
+export const getFireBase = (): firebase.app.App => app;
 
-export const getFireStore = () => firebase.firestore(app);
+export const getFireStore = (): firebase.firestore.Firestore =>
+	firebase.firestore(app);
 
-export const getTimestamp = () =>
+export const getTimestamp = (): firebase.firestore.Timestamp =>
 	firebase.firestore.Timestamp.fromDate(new Date());

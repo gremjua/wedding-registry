@@ -58,7 +58,7 @@ export const fetchMockItems = (): Promise<Gift[]> =>
 	});
 
 export const storeMockTransaction = (
-	transaction: Transaction
+	_transaction: Transaction
 ): Promise<string> =>
 	new Promise(resolve => {
 		setTimeout(() => {
@@ -75,7 +75,7 @@ const testDBTransaction: DBTransaction = {
 	status: 'pending',
 };
 
-export const fetchMockTransaction = (id: string): Promise<DBTransaction> =>
+export const fetchMockTransaction = (_id: string): Promise<DBTransaction> =>
 	// const { id: tid, status, ...t } = testTransaction;
 	new Promise(resolve => {
 		setTimeout(() => {
@@ -83,14 +83,14 @@ export const fetchMockTransaction = (id: string): Promise<DBTransaction> =>
 		}, 2000);
 	});
 
-export const updateMockTransaction = (t: DBTransaction): Promise<boolean> =>
+export const updateMockTransaction = (_t: DBTransaction): Promise<boolean> =>
 	new Promise(resolve => {
 		setTimeout(() => {
 			resolve(true);
 		}, 2000);
 	});
 
-export const fetchMockCoupleBySlug = (slug: string): Promise<DBCouple> =>
+export const fetchMockCoupleBySlug = (_slug: string): Promise<DBCouple> =>
 	new Promise(resolve => {
 		setTimeout(() => {
 			resolve(couple);

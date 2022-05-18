@@ -58,7 +58,7 @@ const numberValidation = (field: string, value: string): string | null =>
 		: `El campo ${field} debe ser un número`;
 
 const validate: { [index: string]: (name: string) => string | null } = {
-	tag: (name?: string) => null,
+	tag: (_name?: string) => null,
 	buyerName: (name: string) =>
 		requiredValidation('Nombre', name) || nameValidation('Nombre', name),
 	email: (email: string) =>
@@ -99,7 +99,6 @@ const GiftTagForm = (props: Props): JSX.Element => {
 			initialValues={{ ...initialValues, ...(amount && { amount }) }}
 			validate={validateForm}
 			onSubmit={(values, { setSubmitting }) => {
-				console.log(values);
 				setTransaction(values as Transaction);
 				setSubmitting(false);
 				if (couple?.slug) {

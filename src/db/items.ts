@@ -23,6 +23,7 @@ const fetchItemsDB = (coupleId: string): Promise<Gift[]> => {
 		});
 };
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const migrateItems = () => {
 	const db = getFireStore();
 	const items = db.collection('items');
