@@ -50,6 +50,7 @@ module.exports = {
 				arrowParens: 'avoid',
 			},
 		],
+		'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
 	},
 	settings: {
 		'import/resolver': {
