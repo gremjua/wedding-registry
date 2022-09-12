@@ -35,7 +35,7 @@
     "test": "cypress run",
     "eject": "react-scripts eject",
     "format": "prettier --write src/**/*.ts{,x}",
-    "lint": "tsc --noEmit && eslint src/**/*.ts{,x} --fix",
+    "lint": "tsc --noEmit && npx tsc -p ./cypress/tsconfig.json --noEmit && eslint src/**/*.ts{,x} --fix",
     "prepare": "husky install",
     "pre-commit": "lint-staged",
     "cypress:open": "cypress open"
@@ -65,6 +65,7 @@
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-prettier": "^8.3.0",
     "eslint-import-resolver-typescript": "^2.4.0",
+    "eslint-plugin-cypress": "^2.12.1",
     "eslint-plugin-import": "^2.23.4",
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-prettier": "^3.4.0",
@@ -82,5 +83,10 @@
   },
   "nyc": {
     "exclude": "src/serviceWorker.js"
+  },
+  "jest": {
+    "testPathIgnorePatterns": [
+      "*"
+    ]
   }
 }

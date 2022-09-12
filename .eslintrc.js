@@ -8,6 +8,7 @@ module.exports = {
 		'airbnb',
 		'plugin:@typescript-eslint/recommended',
 		'prettier',
+		'plugin:cypress/recommended',
 	],
 	parser: '@typescript-eslint/parser',
 	parserOptions: {
@@ -17,7 +18,7 @@ module.exports = {
 		ecmaVersion: 12,
 		sourceType: 'module',
 	},
-	plugins: ['react', '@typescript-eslint', 'prettier'],
+	plugins: ['react', '@typescript-eslint', 'prettier', 'cypress'],
 	rules: {
 		'no-use-before-define': 'off',
 		'@typescript-eslint/no-use-before-define': ['error'],
