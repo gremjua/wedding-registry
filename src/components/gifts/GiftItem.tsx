@@ -13,6 +13,7 @@ import React, { useContext } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGift } from '@fortawesome/free-solid-svg-icons';
 import GoToCartButton from 'components/common/GoToCartButton';
+import numberToPriceString from 'utils/price';
 import { Gift } from './types';
 
 const useStyles = makeStyles({
@@ -44,7 +45,11 @@ const GiftItem = (props: Props): JSX.Element => {
 	return (
 		<>
 			<Grow in timeout={1000}>
-				<Card className={classes.root} onClick={() => addGiftToCart(item)}>
+				<Card
+					className={classes.root}
+					onClick={() => addGiftToCart(item)}
+					data-cy='giftItem'
+				>
 					{/* If isInCart => mark as in cart */}
 					<CardActionArea className={classes.action}>
 						<CardMedia
@@ -53,16 +58,23 @@ const GiftItem = (props: Props): JSX.Element => {
 							title={item.name}
 						/>
 						<CardContent>
-							<Typography gutterBottom variant='body1' component='h2' align='center'>
+							<Typography
+								gutterBottom
+								variant='body1'
+								component='h2'
+								align='center'
+								data-cy='giftItemName'
+							>
 								{item.name}
 							</Typography>
 							<Typography
 								variant='subtitle1'
 								color='textSecondary'
 								align='center'
+								data-cy='giftItemPrice'
 								style={{ fontWeight: 'bolder' }}
 							>
-								{`AR$ ${item.price.toLocaleString('es-ar')}`}
+								{numberToPriceString(item.price, 'AR$')}
 							</Typography>
 						</CardContent>
 					</CardActionArea>

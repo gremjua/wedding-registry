@@ -2,8 +2,9 @@ import { Gift } from 'components/gifts/types';
 import { DBTransaction, Transaction } from './TransactionContext';
 import { DBCouple } from './CoupleContext';
 
+const DELAY = parseInt(process.env.DELAY || '10', 10);
 const percheroNordico = '/images/gifts/percheroNordico.jpg';
-const gifts: Gift[] = [
+export const gifts: Gift[] = [
 	{
 		id: '1',
 		name: 'Perchero nórdico',
@@ -54,7 +55,7 @@ export const fetchMockItems = (): Promise<Gift[]> =>
 	new Promise(resolve => {
 		setTimeout(() => {
 			resolve(gifts);
-		}, 2000);
+		}, DELAY);
 	});
 
 export const storeMockTransaction = (
@@ -63,7 +64,7 @@ export const storeMockTransaction = (
 	new Promise(resolve => {
 		setTimeout(() => {
 			resolve('this-is-a-test-transaction-id');
-		}, 2000);
+		}, DELAY);
 	});
 
 const testDBTransaction: DBTransaction = {
@@ -80,19 +81,19 @@ export const fetchMockTransaction = (_id: string): Promise<DBTransaction> =>
 	new Promise(resolve => {
 		setTimeout(() => {
 			resolve(testDBTransaction);
-		}, 2000);
+		}, DELAY);
 	});
 
 export const updateMockTransaction = (_t: DBTransaction): Promise<boolean> =>
 	new Promise(resolve => {
 		setTimeout(() => {
 			resolve(true);
-		}, 2000);
+		}, DELAY);
 	});
 
 export const fetchMockCoupleBySlug = (_slug: string): Promise<DBCouple> =>
 	new Promise(resolve => {
 		setTimeout(() => {
 			resolve(couple);
-		}, 2000);
+		}, DELAY);
 	});
