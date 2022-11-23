@@ -49,6 +49,7 @@ module.exports = {
 				tabWidth: 1,
 				jsxSingleQuote: true,
 				arrowParens: 'avoid',
+				endOfLine: 'auto',
 			},
 		],
 		'import/no-extraneous-dependencies': ['error', { devDependencies: true }],

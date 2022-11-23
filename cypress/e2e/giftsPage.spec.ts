@@ -8,7 +8,7 @@ describe('gifts page', () => {
 	it('should load all expected elements', () => {
 		cy.get('.headerImage').should('not.be.visible');
 		gifts.forEach(gift => {
-			cy.get(`[data-cy="giftItemCell-${gift.id}"]`).within($cell => {
+			cy.get(`[data-cy="giftItemCell-${gift.id}"]`).within(_$cell => {
 				cy
 					.get('[data-cy="giftItemName"]')
 					.should('be.visible')
