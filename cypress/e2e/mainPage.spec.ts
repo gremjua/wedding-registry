@@ -1,4 +1,4 @@
-describe('Main Page', () => {
+describe('couples main page', () => {
 	beforeEach(() => {
 		cy.visit('/testCouple');
 	});
@@ -14,5 +14,10 @@ describe('Main Page', () => {
 	it('should lead to the gifts page', () => {
 		cy.get('[data-cy="chooseGiftButton"]', { timeout: 10000 }).click();
 		cy.url().should('contain', '/gifts');
+	});
+
+	it('should lead to the gift tagging - send money - page', () => {
+		cy.get('[data-cy="sendMoneyButton"]', { timeout: 10000 }).click();
+		cy.url().should('contain', '/giftTagging/money');
 	});
 });

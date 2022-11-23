@@ -1,7 +1,7 @@
 import { gifts } from 'context/mocks';
 import numberToPriceString from 'utils/price';
 
-describe('empty spec', () => {
+describe('gifts page', () => {
 	beforeEach(() => {
 		cy.visit('/testCouple/gifts');
 	});
