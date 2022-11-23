@@ -47,6 +47,7 @@ const UploadButton = ({ transactionId, voucherRef }: Props): JSX.Element => {
 			size='large'
 			color='primary'
 			innerRef={voucherRef}
+			data-cy='uploadButton'
 		>
 			Subí el comprobante
 			<input type='file' multiple={false} hidden onChange={e => doUpload(e)} />

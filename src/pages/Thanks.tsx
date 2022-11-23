@@ -10,10 +10,10 @@ const Thanks = (): JSX.Element => (
 	<Container>
 		<Box my='20px'>
 			<Box my='10px' display='flex' flexDirection='column' alignItems='center'>
-				<Typography variant='h6' align='center'>
+				<Typography variant='h6' align='center' data-cy='thanksPageMessage'>
 					¡Muchas gracias por tu regalo!
 				</Typography>
-				<FontAwesomeIcon icon={faLaugh} size='10x' />
+				<FontAwesomeIcon icon={faLaugh} size='10x' data-cy='thanksPageIcon' />
 			</Box>
 		</Box>
 	</Container>

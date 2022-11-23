@@ -21,4 +21,10 @@ describe('gifts page', () => {
 			});
 		});
 	});
+
+	it('should lead to the gift cart page', () => {
+		cy.get('[data-cy="giftItem"]').first().click();
+		cy.get('[data-cy="goToCartButton"]').click();
+		cy.url().should('contain', '/giftCart');
+	});
 });

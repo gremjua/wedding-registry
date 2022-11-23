@@ -50,6 +50,7 @@ const CartFooter = (): JSX.Element => {
 							size='large'
 							color='secondary'
 							style={{ width: '100%' }}
+							data-cy='payButton'
 						>
 							Pagá
 						</Button>
