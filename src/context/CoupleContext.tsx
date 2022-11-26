@@ -1,6 +1,5 @@
 import { fetchCoupleBySlugDB } from 'db/couples';
 import React, { createContext, useState } from 'react';
-import { fetchMockCoupleBySlug } from './mocks';
 
 export type Bank = {
 	name: string;
@@ -38,10 +37,7 @@ export const CoupleProvider = ({
 
 	const getCouple = () => couple;
 
-	const fetchCoupleBySlug = (slug: string) =>
-		process.env.REACT_APP_USE_MOCKS
-			? fetchMockCoupleBySlug(slug)
-			: fetchCoupleBySlugDB(slug);
+	const fetchCoupleBySlug = (slug: string) => fetchCoupleBySlugDB(slug);
 
 	return (
 		<CoupleContext.Provider

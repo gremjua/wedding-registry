@@ -1,10 +1,11 @@
 import { Gift } from 'components/gifts/types';
-import { DBTransaction, Transaction } from './TransactionContext';
-import { DBCouple } from './CoupleContext';
+// TODO: move DB types to db directory
+import { DBTransaction, Transaction } from 'context/TransactionContext';
+import { DBCouple } from 'context/CoupleContext';
 
 const DELAY = parseInt(process.env.DELAY || '10', 10);
 const percheroNordico = '/images/gifts/percheroNordico.jpg';
-export const gifts: Gift[] = [
+const gifts: Gift[] = [
 	{
 		id: '1',
 		name: 'Perchero nórdico',
@@ -51,7 +52,16 @@ const couple: DBCouple = {
 	mp: true,
 };
 
-export const fetchMockItems = (): Promise<Gift[]> =>
+const testDBTransaction: DBTransaction = {
+	id: 'test-id',
+	buyerName: 'Test buyer name',
+	tag: 'Test tag',
+	email: 'test@test.com',
+	amount: 500333,
+	status: 'pending',
+};
+
+export const fetchMockItems = (_coupleSlug: string): Promise<Gift[]> =>
 	new Promise(resolve => {
 		setTimeout(() => {
 			resolve(gifts);
@@ -66,15 +76,6 @@ export const storeMockTransaction = (
 			resolve('this-is-a-test-transaction-id');
 		}, DELAY);
 	});
-
-const testDBTransaction: DBTransaction = {
-	id: 'test-id',
-	buyerName: 'Test buyer name',
-	tag: 'Test tag',
-	email: 'test@test.com',
-	amount: 500333,
-	status: 'pending',
-};
 
 export const fetchMockTransaction = (_id: string): Promise<DBTransaction> =>
 	// const { id: tid, status, ...t } = testTransaction;

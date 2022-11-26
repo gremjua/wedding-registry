@@ -1,7 +1,9 @@
 import { Gift } from 'components/gifts/types';
 import { getFireStore } from 'db';
+import { fetchMockItems } from './mocks';
 
 const fetchItemsDB = (coupleId: string): Promise<Gift[]> => {
+	if (process.env.REACT_APP_USE_MOCKS) return fetchMockItems(coupleId);
 	const db = getFireStore();
 	const items = db.collection(`couples/${coupleId}/items`);
 	return items

@@ -1,5 +1,6 @@
 import { DBCouple, Couple } from 'context/CoupleContext';
 import { getFireStore } from 'db';
+import { fetchMockCoupleBySlug } from './mocks';
 
 export const getCoupleIdBySlug = (
 	slug: string
@@ -22,6 +23,8 @@ export const getCoupleIdBySlug = (
 };
 
 export const fetchCoupleBySlugDB = (slug: string): Promise<DBCouple> => {
+	if (process.env.REACT_APP_USE_MOCKS) return fetchMockCoupleBySlug(slug);
+
 	const db = getFireStore();
 	const couples = db.collection('couples');
 	return couples

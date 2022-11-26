@@ -1,8 +1,9 @@
 {
     "extends": "../tsconfig.json",
     "compilerOptions": {
-      "types": ["cypress"],
-      "isolatedModules": false
+      "baseUrl": "../src",
+      "types": ["cypress", "node"],
+      "isolatedModules": false,
     },
-    "include": ["**/*.*"]
+    "include": ["**/*.*", "../src/db/**/*.*", "../src/utils/**/*.*"]
 }
