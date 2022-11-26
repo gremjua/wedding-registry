@@ -1,0 +1,4 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+REACT_APP_USE_MOCKS=true BROWSER=none npm run ci

@@ -33,6 +33,7 @@
     "start": "react-scripts -r @cypress/instrument-cra start",
     "build": "react-scripts build",
     "test": "cypress run",
+    "ci": "start-server-and-test start http://localhost:3000 test",
     "eject": "react-scripts eject",
     "format": "prettier --write src/**/*.ts{,x}",
     "lint": "tsc --noEmit && npx tsc -p ./cypress/tsconfig.json --noEmit && eslint src/**/*.ts{,x} --fix",
@@ -73,7 +74,8 @@
     "eslint-plugin-react-hooks": "^4.2.0",
     "husky": "^6.0.0",
     "lint-staged": "^11.0.0",
-    "prettier": "^2.3.1"
+    "prettier": "^2.3.1",
+    "start-server-and-test": "^1.14.0"
   },
   "lint-staged": {
     "src/**/*.{js,jsx,ts,tsx,json,css,scss}": [
