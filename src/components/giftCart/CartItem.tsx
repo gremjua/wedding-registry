@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMinusCircle } from '@fortawesome/free-solid-svg-icons';
 import React, { useContext } from 'react';
 import { GiftCartContext } from 'context/GiftCartContext';
+import numberToPriceString from 'utils/price';
 
 type Props = {
 	item: Gift;
@@ -37,10 +38,9 @@ const CartItem = ({ item: gift }: Props): JSX.Element => {
 				</Box>
 			</Grid>
 			<Grid item xs={5}>
-				<Typography
-					variant='subtitle2'
-					align='center'
-				>{`AR$ ${gift.price.toLocaleString('es-ar')}`}</Typography>
+				<Typography variant='subtitle2' align='center'>
+					{numberToPriceString(gift.price, 'AR$')}
+				</Typography>
 			</Grid>
 			<Grid item xs={2}>
 				<IconButton onClick={() => removeGiftFromCart(gift)}>

@@ -20,6 +20,7 @@ const Main = (): JSX.Element => {
 						variant='contained'
 						size='large'
 						color='primary'
+						data-cy='sendMoneyButton'
 					>
 						Enviales dinero
 					</Button>

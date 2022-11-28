@@ -23,12 +23,13 @@ const Upload = (): JSX.Element | null => {
 			.catch(error => console.error(error));
 	}, [transactionId]);
 	// TODO: fix LOADING so it is on top of everything else in Page Container
+	// TODO: add error message when the id is invalid when fetching transaction
 	return (
 		<Container>
 			<Box my='20px' display='flex' flexDirection='column' alignItems='center'>
 				{transactionDetails ? (
 					<>
-						<Box my='10px'>
+						<Box my='10px' data-cy='uploadPageTransactionInfo'>
 							<Typography> ID de transacción: {transactionId}</Typography>
 							<Typography>
 								Monto: {`$${transactionDetails?.amount.toLocaleString('es-ar')}`}

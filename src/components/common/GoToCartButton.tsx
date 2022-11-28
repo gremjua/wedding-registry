@@ -14,6 +14,7 @@ const GoToCartButton = (): JSX.Element => {
 			variant='contained'
 			size='small'
 			color='primary'
+			data-cy='goToCartButton'
 		>
 			Ir al carrito
 		</Button>

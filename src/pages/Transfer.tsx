@@ -17,12 +17,17 @@ const Transfer = (): JSX.Element => {
 				{transaction ? (
 					<>
 						<Box my='10px'>
-							<Typography variant='h5'>{`Monto: $ ${transaction?.amount.toLocaleString(
-								'es-ar'
-							)}`}</Typography>
+							<Typography
+								variant='h5'
+								data-cy='transferPageAmountText'
+							>{`Monto: $ ${transaction?.amount.toLocaleString('es-ar')}`}</Typography>
 						</Box>
 						<Box my='10px'>
-							<Typography variant='body1' gutterBottom>
+							<Typography
+								variant='body1'
+								gutterBottom
+								data-cy='transferPageInstructionsText'
+							>
 								Te vamos a pedir que hagas una transferencia desde tu homebanking y
 								después subas el comprobante.
 								<br />
@@ -36,6 +41,7 @@ const Transfer = (): JSX.Element => {
 								to={`/${slug}/transfer/confirm`}
 								variant='contained'
 								color='primary'
+								data-cy='transferPageConfirmButton'
 							>
 								Confirmá
 							</Button>
@@ -48,7 +54,12 @@ const Transfer = (): JSX.Element => {
 						flexDirection='column'
 						justifyContent='center'
 					>
-						<Typography variant='h6' align='center' gutterBottom>
+						<Typography
+							variant='h6'
+							align='center'
+							gutterBottom
+							data-cy='errorMsgNoTransferData'
+						>
 							No tenemos datos para hacer una transferencia.
 						</Typography>
 						<ChooseGiftButton />

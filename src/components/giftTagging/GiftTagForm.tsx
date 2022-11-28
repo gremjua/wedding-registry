@@ -192,6 +192,7 @@ const GiftTagForm = (props: Props): JSX.Element => {
 									submitForm();
 								}}
 								disabled={isSubmitting}
+								data-cy='wireTransferButton'
 							>
 								Transferencia bancaria
 							</Button>
@@ -204,6 +205,7 @@ const GiftTagForm = (props: Props): JSX.Element => {
 										submitForm();
 									}}
 									disabled={isSubmitting}
+									data-cy='mercadopagoButton'
 								>
 									Mercadopago
 								</Button>

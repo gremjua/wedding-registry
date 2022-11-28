@@ -74,7 +74,12 @@ const TransferConfirm = (): JSX.Element => {
 						flexDirection='column'
 						justifyContent='center'
 					>
-						<Typography variant='h6' align='center' gutterBottom>
+						<Typography
+							variant='h6'
+							align='center'
+							gutterBottom
+							data-cy='transferConfirmErrorMessage'
+						>
 							Hubo un error al confirmar la transferencia o no hay transferencia a
 							confirmar.
 						</Typography>
