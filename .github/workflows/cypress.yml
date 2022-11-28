@@ -2,7 +2,7 @@ name: Cypress e2e tests
 
 on:
   push:
-    branches: [ "test/cypress" ]
+    branches: [ "staging" ]
 
 jobs:
   test:
