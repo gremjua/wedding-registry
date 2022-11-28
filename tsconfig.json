@@ -23,6 +23,6 @@
     "checkJs": true
   },
   "include": [
-    "src/**/*.json", "src/**/*.ts", "src/**/*.tsx"
+    "src/**/*.json", "src/**/*.ts", "src/**/*.tsx", "api/**/*.ts"
   ]
 }
