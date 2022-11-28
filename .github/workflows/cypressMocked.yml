@@ -5,7 +5,7 @@ on:
     branches-ignore: [ "staging", "main" ]
 
 jobs:
-  test:
+  mocked-test:
     runs-on: ubuntu-latest
     env:
       REACT_APP_USE_MOCKS: true
