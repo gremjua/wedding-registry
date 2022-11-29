@@ -23,11 +23,13 @@ jobs:
       with:
         command: npm run ci
     - name: Archive test screenshots
+      if: ${{ always() }}
       uses: actions/upload-artifact@v3
       with:
         name: screenshots
         path: cypress/screenshots/**/*.*
     - name: Archive test videos
+      if: ${{ always() }}
       uses: actions/upload-artifact@v3
       with:
         name: videos
