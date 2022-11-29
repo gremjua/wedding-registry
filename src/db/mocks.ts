@@ -40,7 +40,7 @@ const gifts: Gift[] = [
 
 const couple: DBCouple = {
 	id: 'testId',
-	slug: 'testSlug',
+	slug: 'testCouple',
 	title: 'Test 1 and Test 2',
 	headerImgUrl: '/images/juanYSol.jpg',
 	email: 'test@gmail.com',

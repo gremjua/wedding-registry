@@ -7,6 +7,7 @@ export default defineConfig({
 	e2e: {
 		baseUrl: 'http://localhost:3000',
 		specPattern: 'cypress/e2e/**/*.spec.{js,jsx,ts,tsx}',
+		defaultCommandTimeout: 20000,
 		setupNodeEvents(on, config) {
 			// implement node event listeners here
 			// eslint-disable-next-line @typescript-eslint/no-var-requires, global-require
