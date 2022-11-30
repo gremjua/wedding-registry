@@ -30,14 +30,16 @@
     "web-vitals": "^1.1.2"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "react-scripts -r @cypress/instrument-cra start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "cypress run",
+    "ci": "start-server-and-test start http://localhost:3000 test",
     "eject": "react-scripts eject",
     "format": "prettier --write src/**/*.ts{,x}",
-    "lint": "tsc --noEmit && eslint src/**/*.ts{,x} --fix",
+    "lint": "tsc --noEmit && npx tsc -p ./cypress/tsconfig.json --noEmit && eslint src/**/*.ts{,x} --fix",
     "prepare": "husky install",
-    "pre-commit": "lint-staged"
+    "pre-commit": "lint-staged",
+    "cypress:open": "cypress open"
   },
   "browserslist": {
     "production": [
@@ -52,15 +54,19 @@
     ]
   },
   "devDependencies": {
+    "@cypress/code-coverage": "^3.10.0",
+    "@cypress/instrument-cra": "^1.4.0",
     "@types/node-fetch": "^2.5.12",
     "@types/nodemailer": "^6.4.4",
     "@types/react-router-dom": "^5.1.7",
     "@typescript-eslint/eslint-plugin": "^4.27.0",
     "@typescript-eslint/parser": "^4.27.0",
+    "cypress": "^10.3.1",
     "eslint": "^7.29.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-prettier": "^8.3.0",
     "eslint-import-resolver-typescript": "^2.4.0",
+    "eslint-plugin-cypress": "^2.12.1",
     "eslint-plugin-import": "^2.23.4",
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-prettier": "^3.4.0",
@@ -68,12 +74,21 @@
     "eslint-plugin-react-hooks": "^4.2.0",
     "husky": "^6.0.0",
     "lint-staged": "^11.0.0",
-    "prettier": "^2.3.1"
+    "prettier": "^2.3.1",
+    "start-server-and-test": "^1.14.0"
   },
   "lint-staged": {
     "src/**/*.{js,jsx,ts,tsx,json,css,scss}": [
       "prettier --write",
       "eslint --fix src/"
+    ]
+  },
+  "nyc": {
+    "exclude": "src/serviceWorker.js"
+  },
+  "jest": {
+    "testPathIgnorePatterns": [
+      "*"
     ]
   }
 }

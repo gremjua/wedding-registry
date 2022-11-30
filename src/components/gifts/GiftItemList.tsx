@@ -18,7 +18,7 @@ const GiftItemList = (props: Props): JSX.Element => {
 			style={{ minWidth: 300 }}
 		>
 			{gifts.map(gift => (
-				<Grid key={gift.id} item xs={6} sm={4}>
+				<Grid key={gift.id} item xs={6} sm={4} data-cy={`giftItemCell-${gift.id}`}>
 					<GiftItem item={gift} />
 				</Grid>
 			))}

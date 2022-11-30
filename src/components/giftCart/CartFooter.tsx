@@ -4,6 +4,7 @@ import { GiftCartContext } from 'context/GiftCartContext';
 import { Link as RouterLink } from 'react-router-dom';
 import React, { useContext } from 'react';
 import { CoupleContext } from 'context/CoupleContext';
+import numberToPriceString from 'utils/price';
 
 const CartFooter = (): JSX.Element => {
 	const { getTotals } = useContext(GiftCartContext);
@@ -28,7 +29,7 @@ const CartFooter = (): JSX.Element => {
 			</Grid>
 			<Grid item xs={5}>
 				<Typography variant='h6' align='center'>
-					{`AR$ ${totalPrice.toLocaleString('es-ar')}`}
+					{numberToPriceString(totalPrice, 'AR$')}
 				</Typography>
 			</Grid>
 			<Grid item xs={2} />
@@ -49,6 +50,7 @@ const CartFooter = (): JSX.Element => {
 							size='large'
 							color='secondary'
 							style={{ width: '100%' }}
+							data-cy='payButton'
 						>
 							Pagá
 						</Button>

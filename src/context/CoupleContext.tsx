@@ -37,7 +37,6 @@ export const CoupleProvider = ({
 
 	const getCouple = () => couple;
 
-	// TODO: add mocks
 	const fetchCoupleBySlug = (slug: string) => fetchCoupleBySlugDB(slug);
 
 	return (

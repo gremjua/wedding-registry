@@ -19,6 +19,7 @@ const ChooseGiftButton = ({
 			variant='contained'
 			size='large'
 			color='primary'
+			data-cy='chooseGiftButton'
 		>
 			{message}
 		</Button>

@@ -8,6 +8,7 @@ module.exports = {
 		'airbnb',
 		'plugin:@typescript-eslint/recommended',
 		'prettier',
+		'plugin:cypress/recommended',
 	],
 	parser: '@typescript-eslint/parser',
 	parserOptions: {
@@ -17,10 +18,11 @@ module.exports = {
 		ecmaVersion: 12,
 		sourceType: 'module',
 	},
-	plugins: ['react', '@typescript-eslint', 'prettier'],
+	plugins: ['react', '@typescript-eslint', 'prettier', 'cypress'],
 	rules: {
 		'no-use-before-define': 'off',
 		'@typescript-eslint/no-use-before-define': ['error'],
+		'@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
 		'react/jsx-filename-extension': [
 			'warn',
 			{ extensions: ['.js', '.jsx', '.ts', '.tsx'] },
@@ -47,8 +49,10 @@ module.exports = {
 				tabWidth: 1,
 				jsxSingleQuote: true,
 				arrowParens: 'avoid',
+				endOfLine: 'auto',
 			},
 		],
+		'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
 	},
 	settings: {
 		'import/resolver': {

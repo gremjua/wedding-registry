@@ -36,6 +36,7 @@ const NavBar = (props: NavBarProps): JSX.Element => {
 								src='/images/pretzelsLogo2.png'
 								alt='Pretzels logo'
 								style={{ width: '280px', position: 'absolute', left: 0 }}
+								data-cy='logo'
 							/>
 							<GiftCartWidget slug={slug || ''} />
 						</Toolbar>

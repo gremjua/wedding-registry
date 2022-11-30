@@ -4,11 +4,6 @@ import {
 	updateTransactionDB,
 } from 'db/transactions';
 import React, { createContext, useState } from 'react';
-import {
-	fetchMockTransaction,
-	storeMockTransaction,
-	updateMockTransaction,
-} from './mocks';
 
 export type TransactionStatus = 'pending' | 'success' | 'failure';
 
@@ -57,25 +52,17 @@ export const TransactionProvider = ({
 	const clearTransaction = () => setTransaction(undefined);
 
 	const storeTransaction = (t: Transaction, coupleId: string): Promise<string> =>
-		process.env.REACT_APP_USE_MOCKS
-			? storeMockTransaction(t)
-			: storeTransactionDB(t, coupleId);
+		storeTransactionDB(t, coupleId);
 
 	const fetchTransaction = (
 		transactionId: string,
 		coupleId: string
-	): Promise<DBTransaction> =>
-		process.env.REACT_APP_USE_MOCKS
-			? fetchMockTransaction(transactionId)
-			: fetchTransactionDB(transactionId, coupleId);
+	): Promise<DBTransaction> => fetchTransactionDB(transactionId, coupleId);
 
 	const updateTransaction = (
 		t: DBTransaction,
 		coupleId: string
-	): Promise<boolean> =>
-		process.env.REACT_APP_USE_MOCKS
-			? updateMockTransaction(t)
-			: updateTransactionDB(t, coupleId);
+	): Promise<boolean> => updateTransactionDB(t, coupleId);
 
 	const approveTransaction = (
 		transactionId: string,
@@ -86,7 +73,7 @@ export const TransactionProvider = ({
 				const approvedTransaction: DBTransaction = { ...t, status: 'success' };
 				return updateTransaction(approvedTransaction, coupleId);
 			})
-			.catch(error => false);
+			.catch(_error => false);
 
 	return (
 		<TransactionContext.Provider

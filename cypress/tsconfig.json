@@ -1,0 +1,9 @@
+{
+    "extends": "../tsconfig.json",
+    "compilerOptions": {
+      "baseUrl": "../src",
+      "types": ["cypress", "node"],
+      "isolatedModules": false,
+    },
+    "include": ["**/*.*", "../src/db/**/*.*", "../src/utils/**/*.*"]
+}

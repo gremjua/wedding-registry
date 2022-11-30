@@ -1,0 +1,37 @@
+name: Cypress e2e tests
+
+on:
+  push:
+    branches: [ "staging" ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+    - name: Setup Node
+      uses: actions/setup-node@v1
+      with:
+        node-version: 14.17.1
+    - run: node -v
+    - name: Cypress run
+      uses: cypress-io/github-action@v4.2.1
+      env:
+        REACT_APP_FIREBASE_API_KEY: ${{ secrets.FIREBASE_API_KEY }}
+        CYPRESS_BASE_URL: ${{ secrets.STAGING_URL }}
+        REACT_APP_URL: ${{ secrets.STAGING_URL }}
+      with:
+        command-prefix: "--"
+    - name: Archive test screenshots
+      if: ${{ always() }}
+      uses: actions/upload-artifact@v3
+      with:
+        name: screenshots
+        path: cypress/screenshots/**/*.*
+    - name: Archive test videos
+      if: ${{ always() }}
+      uses: actions/upload-artifact@v3
+      with:
+        name: videos
+        path: cypress/videos/**/*.*
