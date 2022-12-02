@@ -16,6 +16,14 @@ type RequestBody = {
 	uid: string;
 };
 
+/**
+ * Auth API - Gifter
+ * @summary This endpoint should not be needed because we are going to use anonymous users.
+ * It would normally get a UID, such as email, and return a JWT, which can then be used in the firebase client for auth.
+ * @param {VercelRequest} request
+ * @param {VercelResponse} response
+ * @returns {void}
+ */
 export default (request: VercelRequest, response: VercelResponse): void => {
 	const { uid } = request.body as RequestBody;
 
