@@ -17,6 +17,7 @@
     "@types/react-dom": "^17.0.7",
     "@vercel/node": "^1.11.1",
     "firebase": "^8.8.0",
+    "firebase-admin": "^11.3.0",
     "formik": "^2.2.9",
     "formik-material-ui": "^3.0.1",
     "node-fetch": "^2.6.1",
