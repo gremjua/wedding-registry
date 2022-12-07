@@ -8,6 +8,7 @@ jobs:
   mocked-test:
     runs-on: ubuntu-latest
     env:
+      REACT_APP_FIREBASE_API_KEY: ${{ secrets.FIREBASE_API_KEY }}
       REACT_APP_USE_MOCKS: true
       BROWSER: none
     steps:

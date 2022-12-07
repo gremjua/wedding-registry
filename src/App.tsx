@@ -8,10 +8,12 @@ import { TransactionProvider } from 'context/TransactionContext';
 import { CoupleProvider } from 'context/CoupleContext';
 import AppContainer from 'pages/AppContainer';
 import PageRouter from 'components/router/PageRouter';
+import Auth from 'components/auth/Auth';
 
 function App(): JSX.Element {
 	return (
 		<div className='App'>
+			<Auth />
 			<GiftCartProvider>
 				<TransactionProvider>
 					<GiftItemsProvider>

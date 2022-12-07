@@ -1,6 +1,8 @@
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 
+require('firebase/auth');
+
 const firebaseConfig = {
 	apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
 	authDomain: 'wedding-registry-cead1.firebaseapp.com',
@@ -21,3 +23,5 @@ export const getFireStore = (): firebase.firestore.Firestore =>
 
 export const getTimestamp = (): firebase.firestore.Timestamp =>
 	firebase.firestore.Timestamp.fromDate(new Date());
+
+export const getAuth = (): firebase.auth.Auth => app.auth();
