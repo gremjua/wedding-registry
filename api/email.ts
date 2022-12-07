@@ -20,7 +20,7 @@ export default (request: VercelRequest, response: VercelResponse): void => {
 		html: emailData.content,
 	};
 
-	transporter.sendMail(mailOptions, (err, info) => {
+	transporter.sendMail(mailOptions, (err, _info) => {
 		if (err) {
 			response.status(500).send({ data: 'Error sending email' });
 		} else {
