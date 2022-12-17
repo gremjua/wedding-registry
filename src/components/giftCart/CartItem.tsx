@@ -43,7 +43,10 @@ const CartItem = ({ item: gift }: Props): JSX.Element => {
 				</Typography>
 			</Grid>
 			<Grid item xs={2}>
-				<IconButton onClick={() => removeGiftFromCart(gift)}>
+				<IconButton
+					data-cy='removeGiftButton'
+					onClick={() => removeGiftFromCart(gift)}
+				>
 					<FontAwesomeIcon icon={faMinusCircle} size='sm' />
 				</IconButton>
 			</Grid>
