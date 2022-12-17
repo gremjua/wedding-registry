@@ -21,6 +21,8 @@ jobs:
         REACT_APP_FIREBASE_API_KEY: ${{ secrets.FIREBASE_API_KEY }}
         CYPRESS_BASE_URL: ${{ secrets.STAGING_URL }}
         REACT_APP_URL: ${{ secrets.STAGING_URL }}
+        REACT_APP_EMAIL: ${{ secrets.EMAIL }}
+        REACT_APP_EMAIL_PASS: ${{ secrets.EMAIL_PASS }}
       with:
         command-prefix: "--"
     - name: Archive test screenshots

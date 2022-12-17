@@ -10,6 +10,8 @@ jobs:
     env:
       REACT_APP_URL: ${{ secrets.LOCAL_URL }}
       REACT_APP_FIREBASE_API_KEY: ${{ secrets.FIREBASE_API_KEY }}
+      REACT_APP_EMAIL: ${{ secrets.EMAIL }}
+      REACT_APP_EMAIL_PASS: ${{ secrets.EMAIL_PASS }}
       REACT_APP_USE_MOCKS: true
       BROWSER: none
     steps:
