@@ -31,7 +31,7 @@ const Transfer = (): JSX.Element => {
 								Te vamos a pedir que hagas una transferencia desde tu homebanking y
 								después subas el comprobante.
 								<br />
-								Si estás de acuerdo, hacé click en <b>CONFIRMÁ</b>. Se mostrarán los
+								Si estás de acuerdo, hacé click en <b>CONFIRMAR</b>. Se mostrarán los
 								datos de la cuenta a la cual tenés que transferir.
 							</Typography>
 						</Box>
@@ -43,7 +43,7 @@ const Transfer = (): JSX.Element => {
 								color='primary'
 								data-cy='transferPageConfirmButton'
 							>
-								Confirmá
+								Confirmar
 							</Button>
 						</Box>
 					</>
