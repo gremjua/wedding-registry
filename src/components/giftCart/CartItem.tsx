@@ -19,6 +19,7 @@ const CartItem = ({ item: gift }: Props): JSX.Element => {
 			justify='center'
 			alignItems='center'
 			spacing={1}
+			data-cy='giftCartItem'
 		>
 			<Grid item xs={5}>
 				<Box
