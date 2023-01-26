@@ -39,7 +39,7 @@ const buildEmailForGifter = (
                         El ID de tu regalo es: <b>${transactionId}</b>.<br />
                         Hacé la transferencia de <b>$${transaction.amount.toLocaleString(
 																									'es-ar'
-																								)}</b> a la siguiente cuenta y recordá <b>subir el comprobante</b>:
+																								)}</b> a la siguiente cuenta y recordá <b>subir el comprobante en el link más abajo</b>:
                         <br />
                         <b>
                             <i>${couple.bank.name}</i>
@@ -59,7 +59,7 @@ const buildEmailForGifter = (
                         <a href="${process.env.REACT_APP_URL}/${
 		couple.slug
 	}/upload/${transactionId}">
-                        Subí el comprobante de transferencia
+                        Subir el comprobante de transferencia
                         </a>
                     </div>
                 </div>

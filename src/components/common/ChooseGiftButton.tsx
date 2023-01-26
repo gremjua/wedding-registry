@@ -8,7 +8,7 @@ type Props = {
 };
 
 const ChooseGiftButton = ({
-	message = 'Elegí un regalo',
+	message = 'Elegir un regalo',
 }: Props): JSX.Element => {
 	const { getCouple } = useContext(CoupleContext);
 	const { slug } = getCouple() || {};

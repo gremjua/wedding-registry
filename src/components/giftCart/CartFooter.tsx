@@ -52,11 +52,11 @@ const CartFooter = (): JSX.Element => {
 							style={{ width: '100%' }}
 							data-cy='payButton'
 						>
-							Pagá
+							Pagar
 						</Button>
 					</Grid>
 					<Grid item xs={12}>
-						<ChooseGiftButton message='Agregá regalos' />
+						<ChooseGiftButton message='Agregar regalos' />
 					</Grid>
 				</Grid>
 			</Grid>
