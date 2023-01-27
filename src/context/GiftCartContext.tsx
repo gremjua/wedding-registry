@@ -1,5 +1,7 @@
 import { Gift } from 'components/gifts/types';
-import React, { createContext, useState } from 'react';
+import { useLocalStorage } from 'hooks/useLocalStorage';
+import React, { createContext } from 'react';
+import getCoupleSlug from 'utils/url';
 
 type GiftCartContextProps = {
 	getGiftCart: () => Gift[];
@@ -17,7 +19,11 @@ export const GiftCartProvider = ({
 }: {
 	children: React.ReactNode;
 }): JSX.Element => {
-	const [giftCart, setGiftCart] = useState<Gift[]>([]);
+	const slug = getCoupleSlug();
+	const [giftCart, setGiftCart] = useLocalStorage<Gift[]>(
+		`${slug}-giftCart`,
+		[]
+	);
 	const getGiftCart = () => [...giftCart];
 	const isInCart = (gift: Gift) =>
 		giftCart.findIndex(el => el.id === gift.id) !== -1;

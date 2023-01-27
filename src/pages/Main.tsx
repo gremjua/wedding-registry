@@ -22,7 +22,7 @@ const Main = (): JSX.Element => {
 						color='primary'
 						data-cy='sendMoneyButton'
 					>
-						Enviales dinero
+						Enviarles dinero
 					</Button>
 				</Box>
 			</Box>

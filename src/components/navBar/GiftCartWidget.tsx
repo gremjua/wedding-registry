@@ -15,6 +15,7 @@ const GiftCartWidget = ({ slug }: { slug: string }): JSX.Element | null => {
 			to={`/${slug}/giftCart`}
 			color='inherit'
 			aria-label='view gift cart'
+			data-cy='navBarGoToCartButton'
 		>
 			{/* // use total quantity */}
 			<Badge badgeContent={giftCart.length} color='secondary'>

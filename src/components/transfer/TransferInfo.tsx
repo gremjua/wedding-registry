@@ -43,7 +43,7 @@ const TransferInfo = ({
 			</Typography>
 			<Box my='10px'>
 				<Button variant='contained' onClick={e => copyToClipboard(e)}>
-					Copiá el CBU
+					Copiar el CBU
 				</Button>
 				<span> {copySuccess}</span>
 			</Box>

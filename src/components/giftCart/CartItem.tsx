@@ -19,6 +19,7 @@ const CartItem = ({ item: gift }: Props): JSX.Element => {
 			justify='center'
 			alignItems='center'
 			spacing={1}
+			data-cy='giftCartItem'
 		>
 			<Grid item xs={5}>
 				<Box
@@ -43,7 +44,10 @@ const CartItem = ({ item: gift }: Props): JSX.Element => {
 				</Typography>
 			</Grid>
 			<Grid item xs={2}>
-				<IconButton onClick={() => removeGiftFromCart(gift)}>
+				<IconButton
+					data-cy='removeGiftButton'
+					onClick={() => removeGiftFromCart(gift)}
+				>
 					<FontAwesomeIcon icon={faMinusCircle} size='sm' />
 				</IconButton>
 			</Grid>
