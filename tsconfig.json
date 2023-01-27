@@ -5,8 +5,7 @@
     "lib": [
       "dom",
       "dom.iterable",
-      "esnext",
-      "ES2015"
+      "esnext"
     ],
     "allowJs": true,
     "skipLibCheck": true,
@@ -24,6 +23,6 @@
     "checkJs": true
   },
   "include": [
-    "src/**/*.json", "src/**/*.ts", "src/**/*.tsx"
+    "src/**/*.json", "src/**/*.ts", "src/**/*.tsx", "api/**/*.ts"
   ]
 }
