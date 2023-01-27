@@ -1,7 +1,9 @@
 import { VercelRequest, VercelResponse } from '@vercel/node';
 import { EmailData } from 'net/email';
-import { createTransport } from 'nodemailer';
 import { MailOptions } from 'nodemailer/lib/json-transport';
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const { createTransport } = require('nodemailer');
 
 export default (request: VercelRequest, response: VercelResponse): void => {
 	const emailData: EmailData = request.body;
@@ -20,7 +22,7 @@ export default (request: VercelRequest, response: VercelResponse): void => {
 		html: emailData.content,
 	};
 
-	transporter.sendMail(mailOptions, (err, _info) => {
+	transporter.sendMail(mailOptions, (err: any, _info: any) => {
 		if (err) {
 			response.status(500).send({ data: 'Error sending email' });
 		} else {
