@@ -1,6 +1,7 @@
 import { defineConfig } from 'cypress';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import * as dotenv from 'dotenv';
+import { fetchCoupleBySlugDB } from './src/db/couples';
 import fetchItemsDB from './src/db/items';
 
 export default defineConfig({
@@ -17,8 +18,14 @@ export default defineConfig({
 			// eslint-disable-next-line no-param-reassign
 			config.env = { ...config.env, ...dotenv.config() };
 			on('task', {
-				async fetchItemsDB(coupleId: string) {
-					return fetchItemsDB(coupleId);
+				async fetchItemsDB(coupleSlug: string) {
+					// TODO: rename this to clarify we expect a slug
+					return fetchCoupleBySlugDB(coupleSlug).then(couple => {
+						if (couple) {
+							return fetchItemsDB(couple.id);
+						}
+						throw new Error('Invalid coupleSlug');
+					});
 				},
 			});
 

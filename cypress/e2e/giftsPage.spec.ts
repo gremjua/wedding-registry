@@ -35,12 +35,13 @@ describe('gifts page', () => {
 	it('should store selected gifts in local storage', () => {
 		cy.task<Gift[]>('fetchItemsDB', TEST_COUPLE_SLUG).as('gifts');
 		cy.get('[data-cy="giftItem"]').first().click();
+		cy.get('[data-cy="goToCartButton"]').should('be.visible');
 		cy.getAllLocalStorage().then(result => {
 			const baseUrl = Cypress.config().baseUrl || 'http://localhost:3000';
 			cy.get<Gift[]>('@gifts').then(gifts => {
-				expect(result[baseUrl]).to.deep.equal({
-					'testCouple-giftCart': `[${JSON.stringify(gifts[0])}]`,
-				});
+				expect(
+					JSON.parse(result[baseUrl]['testCouple-giftCart'] as string)
+				).to.deep.equal([gifts[0]]);
 			});
 		});
 	});
