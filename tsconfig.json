@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "baseUrl": "src/",
-    "target": "es5",
+    "target": "es6",
     "lib": [
       "dom",
       "dom.iterable",
@@ -24,6 +24,6 @@
     "checkJs": true
   },
   "include": [
-    "src/**/*.json", "src/**/*.ts", "src/**/*.tsx", "api/**/*.ts"
+    "src/**/*.json", "src/**/*.ts", "src/**/*.tsx"
   ]
 }

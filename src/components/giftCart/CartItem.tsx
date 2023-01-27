@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMinusCircle } from '@fortawesome/free-solid-svg-icons';
 import React, { useContext } from 'react';
 import { GiftCartContext } from 'context/GiftCartContext';
-import numberToPriceString from 'utils/price';
+import { numberToPriceString } from 'utils/price';
 
 type Props = {
 	item: Gift;

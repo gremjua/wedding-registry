@@ -1,5 +1,5 @@
 import { Gift } from 'components/gifts/types';
-import numberToPriceString from 'utils/price';
+import { numberToPriceString } from 'utils/price';
 import { TEST_COUPLE_SLUG } from '../support/constants';
 
 describe('gifts page', () => {

@@ -1,7 +1,8 @@
+/* eslint-disable import/no-unresolved */
 import { VercelRequest, VercelResponse } from '@vercel/node';
-import { EmailData } from 'net/email';
 import { createTransport } from 'nodemailer';
 import { MailOptions } from 'nodemailer/lib/json-transport';
+import { EmailData } from 'net/email';
 
 export default (request: VercelRequest, response: VercelResponse): void => {
 	const emailData: EmailData = request.body;
