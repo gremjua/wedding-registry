@@ -2,10 +2,11 @@ const currenciesToLocale = {
 	AR$: 'es-ar',
 };
 
-const numberToPriceString = (
+export const numberToPriceString = (
 	price: number,
 	currency: keyof typeof currenciesToLocale
 ): string =>
 	`${currency} ${price.toLocaleString(currenciesToLocale[currency])}`;
 
-export default numberToPriceString;
+export const priceStringToNumber = (astring: string): number =>
+	parseFloat(astring.split(' ')[1].replace('.', '').replace(' ', ''));

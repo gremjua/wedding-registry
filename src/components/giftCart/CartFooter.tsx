@@ -4,7 +4,7 @@ import { GiftCartContext } from 'context/GiftCartContext';
 import { Link as RouterLink } from 'react-router-dom';
 import React, { useContext } from 'react';
 import { CoupleContext } from 'context/CoupleContext';
-import numberToPriceString from 'utils/price';
+import { numberToPriceString } from 'utils/price';
 
 const CartFooter = (): JSX.Element => {
 	const { getTotals } = useContext(GiftCartContext);
