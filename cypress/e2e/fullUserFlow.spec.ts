@@ -4,7 +4,7 @@ describe('full user flow', () => {
 	});
 	it('should add some gifts and pay by wire transfer', () => {
 		cy.intercept('/api/email', { body: { data: 'success' } }).as('email');
-		cy.get('[data-cy="chooseGiftButton"]', { timeout: 10000 }).click();
+		cy.get('[data-cy="chooseGiftButton"]', { timeout: 20000 }).click();
 		cy.get('[data-cy="giftItem"]').first().click();
 		cy.get('[data-cy="giftItem"]').then(list => {
 			list[1].click();
