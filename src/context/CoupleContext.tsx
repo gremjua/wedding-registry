@@ -14,6 +14,7 @@ export type Couple = {
 	email: string;
 	bank: Bank;
 	mp: boolean; // TODO: contain MP credentials perhaps
+	rsvpUrl: string;
 };
 
 export type DBCouple = Couple & {
