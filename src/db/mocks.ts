@@ -50,6 +50,7 @@ const couple: DBCouple = {
 		name: 'Test Bank',
 	},
 	mp: true,
+	rsvpUrl: 'http://google.com',
 };
 
 const testDBTransaction: DBTransaction = {

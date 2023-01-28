@@ -10,7 +10,14 @@ const GiftCart = (): JSX.Element => {
 
 	return (
 		<Container>
-			<Box my='20px'>
+			<Box
+				my='20px'
+				display='flex'
+				flexDirection='column'
+				alignItems='center'
+				justifyContent='center'
+				width='100%'
+			>
 				{giftCart.length ? (
 					<CartItemList items={giftCart} />
 				) : (
@@ -20,6 +27,8 @@ const GiftCart = (): JSX.Element => {
 						alignItems='center'
 						justifyContent='center'
 						height='80vh'
+						width='100%'
+						maxWidth='300px'
 					>
 						<Typography gutterBottom variant='body1' align='center'>
 							El carrito esta vacío

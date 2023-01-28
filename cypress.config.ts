@@ -27,6 +27,10 @@ export default defineConfig({
 						throw new Error('Invalid coupleSlug');
 					});
 				},
+
+				async fetchCoupleBySlugDB(coupleSlug: string) {
+					return fetchCoupleBySlugDB(coupleSlug);
+				},
 			});
 
 			// It's IMPORTANT to return the config object

@@ -20,6 +20,7 @@ const ChooseGiftButton = ({
 			size='large'
 			color='primary'
 			data-cy='chooseGiftButton'
+			fullWidth
 		>
 			{message}
 		</Button>
