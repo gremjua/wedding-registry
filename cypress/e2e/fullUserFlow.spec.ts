@@ -37,26 +37,32 @@ describe('full user flow', () => {
 		cy.get('[data-cy="transferPageConfirmButton"]').click();
 
 		cy.wait('@email').then(req => {
-			const { content: _content, ...payload } = req.request.body;
+			const { content, ...payload } = req.request.body;
 			const expectedEmail = {
 				from: 'pretzels.regalos@gmail.com',
 				subject: '🎉 Confirmaste tu regalo para Test 1 and Test 2 🎉 ',
 				to: 'test@test.com',
 			};
 			expect(payload).to.deep.equal(expectedEmail);
+			cy.get<{ price2: number; price3: number }>('@prices').then(prices => {
+				expect(content).to.contain(prices.price2).and.contain(prices.price3); // TODO: add error message, expect product titles as well etc or add some other email validation elsewhere
+			});
 		});
 		cy.get('[data-cy="uploadButton"]').selectFile({
 			fileName: 'users.json',
 			contents: Cypress.Buffer.from('file contents'),
 		});
 		cy.wait('@email').then(req => {
-			const { content: _content, ...payload } = req.request.body;
+			const { content, ...payload } = req.request.body;
 			const expectedEmail = {
 				from: 'pretzels.regalos@gmail.com',
 				subject: '🎉 Recibiste un regalo 🎉 ',
 				to: 'test@gmail.com',
 			};
 			expect(payload).to.deep.equal(expectedEmail);
+			cy.get<{ price2: number; price3: number }>('@prices').then(prices => {
+				expect(content).to.contain(prices.price2).and.contain(prices.price3); // TODO: add error message, expect product titles as well etc or add some other email validation elsewhere
+			});
 		});
 		cy.get('[data-cy="thanksPageIcon"]').should('be.visible');
 	});

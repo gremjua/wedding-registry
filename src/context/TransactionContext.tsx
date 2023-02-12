@@ -4,6 +4,7 @@ import {
 	updateTransactionDB,
 } from 'db/transactions';
 import React, { createContext, useState } from 'react';
+import { Gift } from '../components/gifts/types';
 
 export type TransactionStatus = 'pending' | 'success' | 'failure';
 
@@ -12,6 +13,7 @@ export type Transaction = {
 	buyerName: string;
 	email: string;
 	amount: number;
+	gifts?: Gift[];
 };
 
 export type DBTransaction = Transaction & {

@@ -8,31 +8,31 @@ const percheroNordico = '/images/gifts/percheroNordico.jpg';
 const gifts: Gift[] = [
 	{
 		id: '1',
-		name: 'Perchero nórdico',
+		name: 'Perchero nórdico 1',
 		price: 1000,
 		imageUrl: percheroNordico,
 	},
 	{
 		id: '2',
-		name: 'Perchero nórdico',
+		name: 'Perchero nórdico 2',
 		price: 5000,
 		imageUrl: percheroNordico,
 	},
 	{
 		id: '3',
-		name: 'Perchero nórdico',
+		name: 'Perchero nórdico 3',
 		price: 11000,
 		imageUrl: percheroNordico,
 	},
 	{
 		id: '4',
-		name: 'Perchero nórdico',
+		name: 'Perchero nórdico 4',
 		price: 20000,
 		imageUrl: percheroNordico,
 	},
 	{
 		id: '5',
-		name: 'Perchero nórdico',
+		name: 'Perchero nórdico 5',
 		price: 500000,
 		imageUrl: percheroNordico,
 	},
