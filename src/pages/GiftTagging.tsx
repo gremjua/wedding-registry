@@ -11,12 +11,12 @@ interface IParams {
 
 const GiftTagging = (): JSX.Element => {
 	const { giftKind } = useParams<IParams>();
-	const { getTotals } = useContext(GiftCartContext);
+	const { getTotals, getGiftCart } = useContext(GiftCartContext);
 	const amount = giftKind === 'cart' ? getTotals().totalPrice : undefined;
 	return (
 		<Container>
 			<Box my='20px'>
-				<GiftTagForm amount={amount} />
+				<GiftTagForm amount={amount} gifts={getGiftCart()} />
 			</Box>
 		</Container>
 	);

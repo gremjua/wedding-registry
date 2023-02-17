@@ -2,6 +2,9 @@ import { Gift } from '../../src/components/gifts/types';
 import { TEST_COUPLE_SLUG } from '../support/constants';
 
 describe('transfer page', () => {
+	beforeEach(() => {
+		cy.intercept('/api/email', { body: { data: 'success' } }).as('email');
+	});
 	it('should load all expected elements when there is no transfer data', () => {
 		cy.visit('/testCouple/transfer');
 		cy.get('.headerImage').should('not.be.visible');
@@ -24,6 +27,7 @@ describe('transfer page', () => {
 		cy.get('[data-cy="transferPageAmountText"]').should('be.visible');
 		cy.get('[data-cy="transferPageInstructionsText"]').should('be.visible');
 		cy.get('[data-cy="transferPageConfirmButton"]').should('be.visible').click();
+		cy.wait('@email').its('request').its('body.type').should('equal', 'GIFTER');
 		cy.url().should('contain', '/transfer/confirm');
 	});
 
@@ -50,6 +54,7 @@ describe('transfer page', () => {
 		cy.get('[data-cy="transferPageAmountText"]').should('be.visible');
 		cy.get('[data-cy="transferPageInstructionsText"]').should('be.visible');
 		cy.get('[data-cy="transferPageConfirmButton"]').should('be.visible').click();
+		cy.wait('@email');
 		cy.get('[data-cy="uploadButton"]').should('be.visible');
 		cy.getAllLocalStorage().then(result => {
 			const baseUrl = Cypress.config().baseUrl || 'http://localhost:3000';
@@ -82,6 +87,7 @@ describe('transfer page', () => {
 		cy.get('[data-cy="transferPageAmountText"]').should('be.visible');
 		cy.get('[data-cy="transferPageInstructionsText"]').should('be.visible');
 		cy.get('[data-cy="transferPageConfirmButton"]').should('be.visible').click();
+		cy.wait('@email');
 		cy.get('[data-cy="uploadButton"]').should('be.visible');
 		cy.getAllLocalStorage().then(result => {
 			const baseUrl = Cypress.config().baseUrl || 'http://localhost:3000';
