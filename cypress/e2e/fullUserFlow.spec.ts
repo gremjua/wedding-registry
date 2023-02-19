@@ -1,4 +1,8 @@
 import { priceStringToNumber } from '../../src/utils/price';
+import { DBCouple } from '../../src/context/CoupleContext';
+import { TEST_COUPLE_SLUG } from '../support/constants';
+import { DBTransaction } from '../../src/context/TransactionContext';
+import { EmailData } from '../../src/net/email';
 
 describe('full user flow', () => {
 	beforeEach(() => {
@@ -36,73 +40,63 @@ describe('full user flow', () => {
 
 		cy.get('[data-cy="transferPageConfirmButton"]').click();
 
+		cy
+			.get('[data-cy="transactionId"]')
+			.invoke('text')
+			.then(transactionId => {
+				cy.task<DBCouple>('fetchCoupleBySlugDB', TEST_COUPLE_SLUG).then(couple => {
+					cy.wrap(couple).as('couple');
+					cy
+						.task<DBTransaction>('fetchTransactionDB', {
+							transactionId,
+							coupleId: couple.id,
+						})
+						.then(transaction => {
+							cy.wrap(transaction).as('transaction');
+						});
+				});
+			});
+
 		cy.wait('@email').then(req => {
-			const expectedEmail = {
-				from: 'pretzels.regalos@gmail.com',
-				to: 'test@test.com',
-				type: 'GIFTER',
-				transaction: {
-					tag: 'this is a tag 123@A$%^!"\'',
-					buyerName: 'this is my name',
-					email: 'test@test.com',
-					amount: 16000,
-					gifts: [
-						{
-							id: '2',
-							name: 'Perchero nórdico 2',
-							price: 5000,
-							imageUrl: '/images/gifts/percheroNordico.jpg',
-						},
-						{
-							id: '3',
-							name: 'Perchero nórdico 3',
-							price: 11000,
-							imageUrl: '/images/gifts/percheroNordico.jpg',
-						},
-					],
-				},
-				transactionId: 'this-is-a-test-transaction-id',
-				couple: {
-					id: 'testId',
-					slug: 'testCouple',
-					title: 'Test 1 and Test 2',
-					headerImgUrl: '/images/juanYSol.jpg',
-					email: 'test@gmail.com',
-					bank: { alias: 'test.alias', cbu: '000022229999', name: 'Test Bank' },
-					mp: true,
-					rsvpUrl: 'http://google.com',
-				},
-			};
-			expect(req.request.body).to.deep.equal(expectedEmail);
+			cy.get<DBCouple>('@couple').then(({ id: _id, ...couple }) => {
+				cy
+					.get<DBTransaction>('@transaction')
+					.then(
+						({
+							id: transactionId,
+							status: _status,
+							timestamp: _timestamp,
+							...transaction
+						}) => {
+							const expectedEmail = {
+								// from: process.env.REACT_APP_EMAIL,
+								to: email,
+								type: 'GIFTER',
+								transaction,
+								transactionId,
+								couple,
+							};
+							cy.wrap(expectedEmail).as('gifterEmail');
+							const { from, ...actualEmail } = req.request.body;
+							expect(actualEmail).to.deep.equal(expectedEmail);
+						}
+					);
+			});
 		});
 		cy.get('[data-cy="uploadButton"]').selectFile({
 			fileName: 'users.json',
 			contents: Cypress.Buffer.from('file contents'),
 		});
 		cy.wait('@email').then(req => {
-			const expectedEmail = {
-				from: 'pretzels.regalos@gmail.com',
-				to: 'test@test.com',
-				type: 'COUPLE',
-				transaction: {
-					id: 'test-id',
-					buyerName: 'Test buyer name',
-					tag: 'Test tag',
-					email: 'test@test.com',
-					amount: 500333,
-					status: 'pending',
-				},
-				couple: {
-					slug: 'testCouple',
-					title: 'Test 1 and Test 2',
-					headerImgUrl: '/images/juanYSol.jpg',
-					email: 'test@gmail.com',
-					bank: { alias: 'test.alias', cbu: '000022229999', name: 'Test Bank' },
-					mp: true,
-					rsvpUrl: 'http://google.com',
-				},
-			};
-			expect(req.request.body).to.deep.equal(expectedEmail);
+			cy.get<EmailData>('@gifterEmail').then(gifterEmail => {
+				const { transactionId: _transactionId, ...prunedEmail } = gifterEmail;
+				const expectedEmail = {
+					...prunedEmail,
+					type: 'COUPLE',
+				};
+				const { from: _from, ...actualEmail } = req.request.body;
+				expect(actualEmail).to.deep.equal(expectedEmail);
+			});
 		});
 		cy.get('[data-cy="thanksPageIcon"]').should('be.visible');
 	});

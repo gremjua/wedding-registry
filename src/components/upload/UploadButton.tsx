@@ -32,7 +32,13 @@ const UploadButton = ({ transactionId, voucherRef }: Props): JSX.Element => {
 		return approveTransaction(transactionId, coupleId).then(result => {
 			if (result) {
 				fetchTransaction(transactionId, coupleId)
-					.then(transaction => {
+					.then(dbtransaction => {
+						const {
+							id: _id,
+							status: _status,
+							timestamp: _timestamp,
+							...transaction
+						} = dbtransaction;
 						sendEmailToCouple(transaction, couple).catch(err => console.error(err));
 					})
 					.catch(error => console.error(error));
