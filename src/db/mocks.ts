@@ -54,12 +54,26 @@ const couple: DBCouple = {
 };
 
 const testDBTransaction: DBTransaction = {
-	id: 'test-id',
-	buyerName: 'Test buyer name',
-	tag: 'Test tag',
+	id: 'this-is-a-test-transaction-id',
+	buyerName: 'this is my name',
+	tag: 'this is a tag 123@A$%^!"\'',
 	email: 'test@test.com',
-	amount: 500333,
+	amount: 16000,
 	status: 'pending',
+	gifts: [
+		{
+			id: '2',
+			name: 'Perchero nórdico 2',
+			price: 5000,
+			imageUrl: '/images/gifts/percheroNordico.jpg',
+		},
+		{
+			id: '3',
+			name: 'Perchero nórdico 3',
+			price: 11000,
+			imageUrl: '/images/gifts/percheroNordico.jpg',
+		},
+	],
 };
 
 export const fetchMockItems = (_coupleSlug: string): Promise<Gift[]> =>
