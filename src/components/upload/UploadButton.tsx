@@ -14,14 +14,17 @@ const UploadButton = ({ transactionId, voucherRef }: Props): JSX.Element => {
 	const { approveTransaction, fetchTransaction } =
 		useContext(TransactionContext);
 	const { getCouple } = useContext(CoupleContext);
-	const {
-		id: coupleId,
-		email,
-		slug,
-	} = getCouple() || {
-		id: 'noCoupleId',
-		email: 'noEmail',
+	const { id: coupleId, ...couple } = getCouple() || {
+		id: '',
+		slug: '',
+		title: '',
+		headerImgUrl: '',
+		email: '',
+		bank: { name: '', alias: '', cbu: '' },
+		mp: false,
+		rsvpUrl: '',
 	};
+	// const { id: coupleId, slug } = couple;
 	const history = useHistory();
 	const doUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
 		console.log(e.target.files);
@@ -29,11 +32,17 @@ const UploadButton = ({ transactionId, voucherRef }: Props): JSX.Element => {
 		return approveTransaction(transactionId, coupleId).then(result => {
 			if (result) {
 				fetchTransaction(transactionId, coupleId)
-					.then(transaction => {
-						sendEmailToCouple(transaction, email).catch(err => console.error(err));
+					.then(dbtransaction => {
+						const {
+							id: _id,
+							status: _status,
+							timestamp: _timestamp,
+							...transaction
+						} = dbtransaction;
+						sendEmailToCouple(transaction, couple).catch(err => console.error(err));
 					})
 					.catch(error => console.error(error));
-				history.push(`/${slug}/thanks`);
+				history.push(`/${couple.slug}/thanks`);
 			} else {
 				console.error('Error uploading transaction receipt.');
 			}

@@ -3,6 +3,7 @@ import { defineConfig } from 'cypress';
 import * as dotenv from 'dotenv';
 import { fetchCoupleBySlugDB } from './src/db/couples';
 import fetchItemsDB from './src/db/items';
+import { fetchTransactionDB } from './src/db/transactions';
 
 export default defineConfig({
 	e2e: {
@@ -30,6 +31,16 @@ export default defineConfig({
 
 				async fetchCoupleBySlugDB(coupleSlug: string) {
 					return fetchCoupleBySlugDB(coupleSlug);
+				},
+
+				async fetchTransactionDB({
+					transactionId,
+					coupleId,
+				}: {
+					transactionId: string;
+					coupleId: string;
+				}) {
+					return fetchTransactionDB(transactionId, coupleId);
 				},
 			});
 

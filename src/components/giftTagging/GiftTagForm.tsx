@@ -13,6 +13,7 @@ import { useHistory } from 'react-router-dom';
 import { Transaction, TransactionContext } from 'context/TransactionContext';
 import { CoupleContext } from 'context/CoupleContext';
 import { createMercadoPagoOrder } from 'net/mercadopago';
+import { Gift } from 'components/gifts/types';
 
 const initialValues = {
 	tag: '',
@@ -71,10 +72,11 @@ type PaymentMethod = 'mp' | 'tr';
 
 type Props = {
 	amount?: number;
+	gifts?: Gift[];
 };
 
 const GiftTagForm = (props: Props): JSX.Element => {
-	const { amount } = props;
+	const { amount, gifts } = props;
 	const history = useHistory();
 	const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>();
 	const { setTransaction } = useContext(TransactionContext);
@@ -99,7 +101,7 @@ const GiftTagForm = (props: Props): JSX.Element => {
 			initialValues={{ ...initialValues, ...(amount && { amount }) }}
 			validate={validateForm}
 			onSubmit={(values, { setSubmitting }) => {
-				setTransaction(values as Transaction);
+				setTransaction({ ...values, ...(gifts && { gifts }) } as Transaction);
 				setSubmitting(false);
 				if (couple?.slug) {
 					if (paymentMethod === 'tr') {

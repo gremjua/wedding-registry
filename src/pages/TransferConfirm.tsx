@@ -14,7 +14,16 @@ const TransferConfirm = (): JSX.Element => {
 		useContext(TransactionContext);
 	const { clearCart } = useContext(GiftCartContext);
 	const { getCouple } = useContext(CoupleContext);
-	const couple = getCouple();
+	const { id: coupleId, ...couple } = getCouple() || {
+		id: '',
+		slug: '',
+		title: '',
+		headerImgUrl: '',
+		email: '',
+		bank: { name: '', alias: '', cbu: '' },
+		mp: false,
+		rsvpUrl: '',
+	};
 	const [transactionId, setTransactionId] = useState<string>();
 	const [amount, setAmount] = useState<number>();
 	const [isLoading, setIsLoading] = useState(false);
@@ -24,7 +33,7 @@ const TransferConfirm = (): JSX.Element => {
 	useEffect(() => {
 		if (currentTransaction && couple) {
 			setIsLoading(true);
-			storeTransaction(currentTransaction, couple.id)
+			storeTransaction(currentTransaction, coupleId)
 				.then(id => {
 					setTransactionId(id);
 					setAmount(currentTransaction.amount);
@@ -52,7 +61,8 @@ const TransferConfirm = (): JSX.Element => {
 								&#127881; ¡Confirmaste tu regalo! &#127881;
 							</Typography>
 							<Typography variant='body1' align='left' gutterBottom>
-								El ID de tu regalo es: <b>{transactionId}</b>.<br />
+								El ID de tu regalo es: <b data-cy='transactionId'>{transactionId}</b>.
+								<br />
 								Hacé la transferencia de <b>${amount}</b> y recordá subir el comprobante
 								haciendo click más abajo.
 								<br />

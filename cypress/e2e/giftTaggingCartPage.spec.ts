@@ -22,7 +22,7 @@ describe('gift tagging - cart - page', () => {
 			.and('be.enabled');
 	});
 
-	it.only('should have fillable fields and lead to appropriate payment pages', () => {
+	it('should have fillable fields and lead to appropriate payment pages', () => {
 		// TODO: see if we should not be able to fill in amount if cart is empty
 		const tag = 'this is a tag 123@A$%^!"\'';
 		const name = 'this is my name';
