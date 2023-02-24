@@ -43,7 +43,7 @@ const couple: DBCouple = {
 	slug: 'testCouple',
 	title: 'Test 1 and Test 2',
 	headerImgUrl: '/images/juanYSol.jpg',
-	email: 'test@gmail.com',
+	email: 'test@couple.com',
 	bank: {
 		alias: 'test.alias',
 		cbu: '000022229999',
@@ -57,7 +57,7 @@ const testDBTransaction: DBTransaction = {
 	id: 'this-is-a-test-transaction-id',
 	buyerName: 'this is my name',
 	tag: 'this is a tag 123@A$%^!"\'',
-	email: 'test@test.com',
+	email: 'test@gifter.com',
 	amount: 16000,
 	status: 'pending',
 	gifts: [
