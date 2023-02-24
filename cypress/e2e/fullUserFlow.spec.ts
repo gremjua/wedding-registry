@@ -27,7 +27,7 @@ describe('full user flow', () => {
 
 		const tag = 'this is a tag 123@A$%^!"\'';
 		const name = 'this is my name';
-		const email = 'test@test.com';
+		const email = 'test@gifter.com';
 
 		cy.get('#tag').type(tag);
 		cy.get('#buyerName').type(name);
@@ -90,8 +90,10 @@ describe('full user flow', () => {
 		cy.wait('@email').then(req => {
 			cy.get<EmailData>('@gifterEmail').then(gifterEmail => {
 				const { transactionId: _transactionId, ...prunedEmail } = gifterEmail;
+				const coupleEmail = gifterEmail.couple.email;
 				const expectedEmail = {
 					...prunedEmail,
+					to: coupleEmail,
 					type: 'COUPLE',
 				};
 				const { from: _from, ...actualEmail } = req.request.body;
