@@ -35,9 +35,17 @@ const Upload = (): JSX.Element | null => {
 								Monto: {`$${transactionDetails?.amount.toLocaleString('es-ar')}`}
 							</Typography>
 						</Box>
-						<Box my='10px'>
-							<UploadButton transactionId={transactionId} />
-						</Box>
+						{transactionDetails.status === 'pending' ? (
+							<Box my='10px'>
+								<UploadButton transactionId={transactionId} />
+							</Box>
+						) : (
+							<Box my='10px'>
+								<Typography>
+									¡Ya se ha subido el comprobante! No es necesario volver a subirlo.
+								</Typography>
+							</Box> // TODO: agregar boton para volver a pagina principal
+						)}
 					</>
 				) : (
 					<Box my='10px'>

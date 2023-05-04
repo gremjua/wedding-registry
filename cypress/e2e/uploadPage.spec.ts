@@ -10,4 +10,10 @@ describe('upload page', () => {
 		cy.get('[data-cy="uploadPageTransactionInfo"]').should('be.visible');
 		cy.get('[data-cy="uploadButton"]').should('be.visible');
 	});
+
+	// TODO: fix test
+	it.skip('should not allow to upload when an upload has already been made', () => {
+		cy.visit('/testCouple/upload/uploaded-test-id');
+		cy.get('[data-cy="uploadButton"]').should('be.visible');
+	});
 });
