@@ -43,12 +43,12 @@ describe('full user flow', () => {
 		cy
 			.get('[data-cy="transactionId"]')
 			.invoke('text')
-			.then(_transactionId => {
+			.then(transactionId => {
 				cy.task<DBCouple>('fetchCoupleBySlugDB', TEST_COUPLE_SLUG).then(couple => {
 					cy.wrap(couple).as('couple');
 					cy
 						.task<DBTransaction>('fetchTransactionDB', {
-							transactionId: 'test-id',
+							transactionId,
 							coupleId: couple.id,
 						})
 						.then(transaction => {
