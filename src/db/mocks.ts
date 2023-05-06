@@ -54,7 +54,7 @@ const couple: DBCouple = {
 };
 
 const testDBTransaction: DBTransaction = {
-	id: 'this-is-a-test-transaction-id',
+	id: 'test-id',
 	buyerName: 'this is my name',
 	tag: 'this is a tag 123@A$%^!"\'',
 	email: 'test@gifter.com',
@@ -93,7 +93,7 @@ export const storeMockTransaction = (
 ): Promise<string> =>
 	new Promise(resolve => {
 		setTimeout(() => {
-			resolve('this-is-a-test-transaction-id');
+			resolve('test-id');
 		}, DELAY);
 	});
 
