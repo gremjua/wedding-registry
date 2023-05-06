@@ -76,6 +76,11 @@ const testDBTransaction: DBTransaction = {
 	],
 };
 
+const testDBTransactionUploaded: DBTransaction = {
+	...testDBTransaction,
+	status: 'success',
+};
+
 export const fetchMockItems = (_coupleSlug: string): Promise<Gift[]> =>
 	new Promise(resolve => {
 		setTimeout(() => {
@@ -92,11 +97,15 @@ export const storeMockTransaction = (
 		}, DELAY);
 	});
 
-export const fetchMockTransaction = (_id: string): Promise<DBTransaction> =>
+export const fetchMockTransaction = (id = 'test-id'): Promise<DBTransaction> =>
 	// const { id: tid, status, ...t } = testTransaction;
 	new Promise(resolve => {
 		setTimeout(() => {
-			resolve(testDBTransaction);
+			const mockTransactionPerId: Record<string, DBTransaction> = {
+				'test-id': testDBTransaction,
+				'test-id-uploaded': testDBTransactionUploaded,
+			};
+			resolve(mockTransactionPerId[id]);
 		}, DELAY);
 	});
 
